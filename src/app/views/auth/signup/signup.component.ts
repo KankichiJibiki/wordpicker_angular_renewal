@@ -27,6 +27,8 @@ export class SignupComponent {
   }
 
   public signup(){
+    this._putRequirementsTogether();
+    console.log(this.signupList);
     this.overlayService.createOverlay();
     this.spinnerService.start();
 
@@ -40,5 +42,10 @@ export class SignupComponent {
       this.spinnerService.stop();
       this.overlayService.disposeOverlay();
     })
+  }
+
+  private _putRequirementsTogether(){
+    this.signupList.address = this.signupList.state + this.signupList.city + this.signupList.address1 + this.signupList.address2;
+    this.signupList.phone_number = this.signupList.country_code + this.signupList.phone_number;
   }
 }

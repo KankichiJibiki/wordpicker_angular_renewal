@@ -70,10 +70,22 @@
                     <!-- phone number & email -->
                     <div class="flex-container">
                         <mat-form-field class="signup-input">
+                            <mat-label>Country code</mat-label>
+                            <mat-select 
+                            name="country_code"
+                            formControlName="country_code"
+                            [(ngModel)]="signupList.country_code" 
+                            >
+                                <mat-option value="+81">+81 - Japan</mat-option>
+                            </mat-select>
+    
+                            <!-- error -->
+                            <mat-error *ngIf="authForm.get('country_code').hasError('required')" class="alert">Select your Country code</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="signup-input">
                             <mat-label>Phone number</mat-label>
                             <input type="tel" 
                             matInput 
-                            placeholder="+8191865087" 
                             name="phone_number" 
                             [(ngModel)]="signupList.phone_number"
                             formControlName="phone_number"
@@ -124,6 +136,19 @@
                             <mat-error *ngIf="authForm.get('city').hasError('required')" class="alert">City is required</mat-error>
                         </mat-form-field>
                     </div>
+                    
+                    <mat-form-field class="signup-input" >
+                        <mat-label>Address1</mat-label>
+                        <textarea matInput name="address1" formControlName="address1" [(ngModel)]="signupList.address1"></textarea>
+
+                        <!-- error -->
+                        <mat-error *ngIf="authForm.get('address1').hasError('required')" class="alert">The rest of your address is required</mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="signup-input" >
+                        <mat-label>+Add Apt, Suite, Unit</mat-label>
+                        <textarea matInput name="address2" formControlName="address2" [(ngModel)]="signupList.address2"></textarea>
+                    </mat-form-field>
 
                     <button mat-raised-button (click)="signup()" class="full-width mb-1 input_button" color="primary" [disabled]="!authForm.valid">Sign up</button>
                     <section class="flex-container">

@@ -28,6 +28,9 @@ export class SignupValidations{
             birthdate: new FormControl(this.signupList.birthdate, [
                 Validators.required,
             ]),
+            country_code: new FormControl(this.signupList.country_code, [
+                Validators.required,
+            ]),
             phone_number: new FormControl(this.signupList.phone_number, [
                 Validators.required,
                 Validators.pattern('[- +()0-9]+')
@@ -36,6 +39,12 @@ export class SignupValidations{
                 Validators.required,
             ]),
             city: new FormControl(this.signupList.city, [
+                Validators.required,
+            ]),
+            address1: new FormControl(this.signupList.address1, [
+                Validators.required,
+            ]),
+            address2: new FormControl(this.signupList.address2, [
                 Validators.required,
             ]),
         })
