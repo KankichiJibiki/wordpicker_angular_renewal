@@ -1,0 +1,24 @@
+#navigation{
+    position: fixed;
+    width: 100%;
+    margin: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.menu-container{
+    padding: .6rem;
+    height: 150px;
+    text-align: center;
+}
+
+.home, .user{
+    top: .25rem;
+    position: relative;
+}
+
+@media screen and (max-width: 768px) {
+    #username{
+        display: none;
+    }
+}

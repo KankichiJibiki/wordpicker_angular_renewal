@@ -1,1 +1,45 @@
-<p>signin works!</p>
+<main class="full-width">
+    <mat-card class="mt-2 w-40 ele-center">
+        <mat-card-content class="mt-5">
+            <h2 class="text-center">
+                <div>Sign in</div>
+            </h2>
+            <div class="flex-container p-1">
+                <form class="form-content" [formGroup]="authForm">
+                    <mat-form-field class="full-width input_username ele-center" >
+                        <mat-label>Username</mat-label>
+                        <input type="text" 
+                        matInput 
+                        placeholder="taro1234" 
+                        name="username" 
+                        [(ngModel)]="signInList.username"
+                        formControlName="username"
+                        >
+                        <!-- error -->
+                        <mat-error *ngIf="authForm.get('username').hasError('required')" class="alert">Username is required</mat-error>
+                    </mat-form-field>
+            
+                    <mat-form-field class="full-width input_password ele-center">
+                        <mat-label>Password</mat-label>
+                        <input type="password" 
+                        matInput 
+                        placeholder="Password" 
+                        name="password" 
+                        [(ngModel)]="signInList.password"
+                        formControlName="password"
+                        >
+                        <!-- error -->
+                        <mat-error *ngIf="authForm.get('password').hasError('required')" class="alert">Password is required</mat-error>
+                        <mat-error *ngIf="authForm.get('password').hasError('minlength')" class="alert">Password must be more than 8 characters</mat-error>
+                    </mat-form-field>
+
+                    <button mat-raised-button (click)="login()" class="full-width mb-1 input_button" color="primary" [disabled]="!authForm.valid">Login</button>
+                    <section class="flex-container">
+                        <div>Need an account? →</div>
+                        <a mat-button routerLink="signup">Sign up</a>
+                    </section>
+                </form>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</main>
