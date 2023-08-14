@@ -1,162 +1,209 @@
 <main class="full-width">
-    <mat-card class="mt-2 w-80 ele-center">
+    <mat-card class="signup-container">
         <mat-card-content class="mt-6">
             <h2 class="text-center">
                 <div>Sign up following requirements</div>
             </h2>
-            <div class="flex-container p-1">
-                <form class="form-content" [formGroup]="authForm">
-                    <!-- Username & email -->
-                    <div class="flex-container">
-                        <mat-form-field class="ele-center signup-input">
-                            <mat-label>Username</mat-label>
-                            <input type="text" 
-                            matInput 
-                            placeholder="taro1234" 
-                            name="username" 
-                            [(ngModel)]="signupList.username"
-                            formControlName="username"
-                            >
-                            <!-- error -->
-                            <mat-error *ngIf="authForm.get('username').hasError('required')" class="alert">Username is required</mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="signup-input">
-                            <mat-label>Birth date</mat-label>
-                            <input type="date" 
-                            matInput 
-                            placeholder="1985/12/10" 
-                            name="birthdate" 
-                            [(ngModel)]="signupList.birthdate"
-                            formControlName="birthdate"
-                            >
-                            <!-- error -->
-                            <mat-error *ngIf="authForm.get('birthdate').hasError('required')" class="alert">Birth date is required</mat-error>
-                        </mat-form-field>
+            <mat-stepper>
+                <!-- Step1 -->
+                <mat-step [stepControl]="authForm" label="Account information">
+                    <div class="flex-container p-1">
+                        <form class="form-content d-flex jt-between" [formGroup]="authForm">
+                            <!-- Left side -->
+                            <div class="w-20">
+                                <div class="text-center">
+                                    <img src="../../../../assets/images/noimage.png" alt="user-icon" class="user-icon">
+                                </div>
+                                <div class="text-center">
+                                    <input type="file" style="display: none" #fileInput accept="image/*"  />
+                                    <button mat-raised-button color="primary" class="file-select-button">
+                                     <mat-icon>attach_file</mat-icon>
+                                      アイコンを設定
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Right side -->
+                            <div class="w-70">
+                                <!-- Username & email -->
+                                <div class="flex-container">
+                                    <mat-form-field class="ele-center signup-input">
+                                        <mat-label>Username</mat-label>
+                                        <input type="text" 
+                                        matInput 
+                                        placeholder="taro1234" 
+                                        name="username" 
+                                        [(ngModel)]="signupList.username"
+                                        formControlName="username"
+                                        >
+                                        <!-- error -->
+                                        <mat-error *ngIf="authForm.get('username').hasError('required')" class="alert">Username is required</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field class="signup-input">
+                                        <mat-label>Birth date</mat-label>
+                                        <input type="date" 
+                                        matInput 
+                                        placeholder="1985/12/10" 
+                                        name="birthdate" 
+                                        [(ngModel)]="signupList.birthdate"
+                                        formControlName="birthdate"
+                                        >
+                                        <!-- error -->
+                                        <mat-error *ngIf="authForm.get('birthdate').hasError('required')" class="alert">Birth date is required</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <!-- Gender & Password -->
+                                <div class="flex-container">
+                                    <mat-form-field class="signup-input">
+                                        <mat-label>Gender</mat-label>
+                                        <mat-select 
+                                        name="gender"
+                                        formControlName="gender"
+                                        [(ngModel)]="signupList.gender" 
+                                        >
+                                            <mat-option value="male">Male</mat-option>
+                                            <mat-option value="female">Female</mat-option>
+                                        </mat-select>
+                
+                                        <!-- error -->
+                                        <mat-error *ngIf="authForm.get('gender').hasError('required')" class="alert">Select your gender</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field class="signup-input">
+                                        <mat-label>Password</mat-label>
+                                        <input [type]="hidePassword ? 'password' : 'text'" 
+                                        matInput 
+                                        placeholder="Password" 
+                                        name="password" 
+                                        [(ngModel)]="signupList.password"
+                                        formControlName="password"
+                                        >
+                                        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                                        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                                        </button>
+                
+                                        <!-- error -->
+                                        <mat-error *ngIf="authForm.get('password').hasError('required')" class="alert">Password is required</mat-error>
+                                        <mat-error *ngIf="authForm.get('password').hasError('minlength')" class="alert">Password must be more than 10 characters</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <!-- phone number & email -->
+                                <div class="flex-container">
+                                    <mat-form-field class="signup-input">
+                                        <mat-label>Country code</mat-label>
+                                        <mat-select 
+                                        name="country_code"
+                                        formControlName="country_code"
+                                        [(ngModel)]="signupList.country_code" 
+                                        >
+                                            <mat-option value="+81">+81 - Japan</mat-option>
+                                        </mat-select>
+                
+                                        <!-- error -->
+                                        <mat-error *ngIf="authForm.get('country_code').hasError('required')" class="alert">Select your Country code</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field class="signup-input">
+                                        <mat-label>Phone number</mat-label>
+                                        <input type="tel" 
+                                        matInput 
+                                        name="phone_number" 
+                                        [(ngModel)]="signupList.phone_number"
+                                        formControlName="phone_number"
+                                        >
+                                        <!-- error -->
+                                        <mat-error *ngIf="authForm.get('phone_number').hasError('required')" class="alert">Phone number is required</mat-error>
+                                        <mat-error *ngIf="authForm.get('phone_number').hasError('pattern')" class="alert">Phone number is invalid</mat-error>
+                                    </mat-form-field>
+                                    <mat-form-field class="signup-input ele-center" >
+                                        <mat-label>E-mail</mat-label>
+                                        <input type="text" 
+                                        matInput 
+                                        placeholder="you@email.com" 
+                                        name="email" 
+                                        [(ngModel)]="signupList.email"
+                                        formControlName="email"
+                                        >
+                                        <!-- error -->
+                                        <mat-error *ngIf="authForm.get('email').hasError('required')" class="alert">email is required</mat-error>
+                                        <!-- error -->
+                                        <mat-error *ngIf="authForm.get('email').hasError('pattern')" class="alert">email is invalid</mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <button mat-button matStepperNext>Next</button>
+                                    <section class="flex-container">
+                                        <div>Already signed up? →</div>
+                                        <a mat-button routerLink="login">Sign in</a>
+                                    </section>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <!-- Gender & Password -->
-                    <div class="flex-container">
-                        <mat-form-field class="signup-input">
-                            <mat-label>Gender</mat-label>
-                            <mat-select 
-                            name="gender"
-                            formControlName="gender"
-                            [(ngModel)]="signupList.gender" 
-                            >
-                                <mat-option value="male">Male</mat-option>
-                                <mat-option value="female">Female</mat-option>
-                            </mat-select>
+                </mat-step>
+                <!-- Step2 -->
+                <mat-step [stepControl]="authForm" label="Address">
+                    <div class="flex-container p-1">
+                        <form class="form-content" [formGroup]="authForm">
+                            <!-- Address -->
+                            <div class="flex-container">
+                                <mat-form-field class="signup-input">
+                                    <mat-label>State/Province/Prefecture</mat-label>
+                                    <input type="text" 
+                                    matInput 
+                                    placeholder="Tokyo" 
+                                    name="state" 
+                                    [(ngModel)]="signupList.state"
+                                    formControlName="state"
+                                    >
+                                    <!-- error -->
+                                    <mat-error *ngIf="authForm.get('state').hasError('required')" class="alert">State is required</mat-error>
+                                </mat-form-field>
+                                <mat-form-field class="signup-input ele-center" >
+                                    <mat-label>City</mat-label>
+                                    <input type="text" 
+                                    matInput 
+                                    placeholder="Sibuya" 
+                                    name="city" 
+                                    [(ngModel)]="signupList.city"
+                                    formControlName="city"
+                                    >
+                                    <!-- error -->
+                                    <mat-error *ngIf="authForm.get('city').hasError('required')" class="alert">City is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            
+                            <mat-form-field class="signup-input" >
+                                <mat-label>Address1</mat-label>
+                                <textarea matInput name="address1" formControlName="address1" [(ngModel)]="signupList.address1"></textarea>
     
-                            <!-- error -->
-                            <mat-error *ngIf="authForm.get('gender').hasError('required')" class="alert">Select your gender</mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="signup-input">
-                            <mat-label>Password</mat-label>
-                            <input [type]="hidePassword ? 'password' : 'text'" 
-                            matInput 
-                            placeholder="Password" 
-                            name="password" 
-                            [(ngModel)]="signupList.password"
-                            formControlName="password"
-                            >
-                            <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-                              <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-                            </button>
+                                <!-- error -->
+                                <mat-error *ngIf="authForm.get('address1').hasError('required')" class="alert">The rest of your address is required</mat-error>
+                            </mat-form-field>
     
-                            <!-- error -->
-                            <mat-error *ngIf="authForm.get('password').hasError('required')" class="alert">Password is required</mat-error>
-                            <mat-error *ngIf="authForm.get('password').hasError('minlength')" class="alert">Password must be more than 10 characters</mat-error>
-                        </mat-form-field>
+                            <mat-form-field class="signup-input" >
+                                <mat-label>+Add Apt, Suite, Unit</mat-label>
+                                <textarea matInput name="address2" formControlName="address2" [(ngModel)]="signupList.address2"></textarea>
+                            </mat-form-field>
+                        </form>
                     </div>
-                    <!-- phone number & email -->
-                    <div class="flex-container">
-                        <mat-form-field class="signup-input">
-                            <mat-label>Country code</mat-label>
-                            <mat-select 
-                            name="country_code"
-                            formControlName="country_code"
-                            [(ngModel)]="signupList.country_code" 
-                            >
-                                <mat-option value="+81">+81 - Japan</mat-option>
-                            </mat-select>
-    
-                            <!-- error -->
-                            <mat-error *ngIf="authForm.get('country_code').hasError('required')" class="alert">Select your Country code</mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="signup-input">
-                            <mat-label>Phone number</mat-label>
-                            <input type="tel" 
-                            matInput 
-                            name="phone_number" 
-                            [(ngModel)]="signupList.phone_number"
-                            formControlName="phone_number"
-                            >
-                            <!-- error -->
-                            <mat-error *ngIf="authForm.get('phone_number').hasError('required')" class="alert">Phone number is required</mat-error>
-                            <mat-error *ngIf="authForm.get('phone_number').hasError('pattern')" class="alert">Phone number is invalid</mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="signup-input ele-center" >
-                            <mat-label>E-mail</mat-label>
-                            <input type="text" 
-                            matInput 
-                            placeholder="you@email.com" 
-                            name="email" 
-                            [(ngModel)]="signupList.email"
-                            formControlName="email"
-                            >
-                            <!-- error -->
-                            <mat-error *ngIf="authForm.get('email').hasError('required')" class="alert">email is required</mat-error>
-                            <!-- error -->
-                            <mat-error *ngIf="authForm.get('email').hasError('pattern')" class="alert">email is invalid</mat-error>
-                        </mat-form-field>
+                    <div class="text-center">
+                        <button mat-raised-button (click)="signup()" class="input_button" color="primary" [disabled]="!authForm.valid">Sign up</button>
                     </div>
-                    <!-- Address -->
-                    <div class="flex-container">
-                        <mat-form-field class="signup-input">
-                            <mat-label>State/Province/Prefecture</mat-label>
-                            <input type="text" 
-                            matInput 
-                            placeholder="Tokyo" 
-                            name="state" 
-                            [(ngModel)]="signupList.state"
-                            formControlName="state"
-                            >
-                            <!-- error -->
-                            <mat-error *ngIf="authForm.get('state').hasError('required')" class="alert">State is required</mat-error>
-                        </mat-form-field>
-                        <mat-form-field class="signup-input ele-center" >
-                            <mat-label>City</mat-label>
-                            <input type="text" 
-                            matInput 
-                            placeholder="Sibuya" 
-                            name="city" 
-                            [(ngModel)]="signupList.city"
-                            formControlName="city"
-                            >
-                            <!-- error -->
-                            <mat-error *ngIf="authForm.get('city').hasError('required')" class="alert">City is required</mat-error>
-                        </mat-form-field>
-                    </div>
-                    
-                    <mat-form-field class="signup-input" >
-                        <mat-label>Address1</mat-label>
-                        <textarea matInput name="address1" formControlName="address1" [(ngModel)]="signupList.address1"></textarea>
-
-                        <!-- error -->
-                        <mat-error *ngIf="authForm.get('address1').hasError('required')" class="alert">The rest of your address is required</mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="signup-input" >
-                        <mat-label>+Add Apt, Suite, Unit</mat-label>
-                        <textarea matInput name="address2" formControlName="address2" [(ngModel)]="signupList.address2"></textarea>
-                    </mat-form-field>
-
-                    <button mat-raised-button (click)="signup()" class="full-width mb-1 input_button" color="primary" [disabled]="!authForm.valid">Sign up</button>
                     <section class="flex-container">
                         <div>Already signed up? →</div>
-                        <a mat-button routerLink="login">Sign up</a>
+                        <a mat-button routerLink="login">Sign in</a>
                     </section>
-                </form>
-            </div>
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                    </div>
+                </mat-step>
+                <!-- Step3 -->
+                <mat-step label="Step3">
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                </mat-step>
+            </mat-stepper>
+
         </mat-card-content>
     </mat-card>
 </main>

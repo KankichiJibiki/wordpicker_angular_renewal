@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
+import { MatStepperModule } from '@angular/material/stepper';
 
 
 
@@ -29,6 +30,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatRadioModule,
     MatIconModule,
     MatSelectModule,
+    MatStepperModule,
   ]
 })
 export class AuthModule { }

@@ -1,4 +1,28 @@
+.signup-container{
+    width: 90%;
+    margin: 5rem auto 0 auto;
+}
+
 .signup-input{
     padding: .3rem;
+    width: 100%;
+}
+
+.input_button{
+    width: 50%;
+    height: 3rem;
+    margin: 0 auto .7rem auto;
+}
+
+.user-icon{
+    width: 180px;
+    height: 180px;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin: 0 auto .7rem auto;
+}
+
+.file-select-button{
+    font-size: .7rem;
     width: 100%;
 }
