@@ -12,11 +12,17 @@
                             <!-- Left side -->
                             <div class="w-20">
                                 <div class="text-center">
-                                    <img src="../../../../assets/images/noimage.png" alt="user-icon" class="user-icon">
+                                    <ng-container *ngIf="uploadedImage == null then noIcon else displayIcon"></ng-container>
+                                    <ng-template #noIcon>
+                                        <img src="../../../../assets/images/noimage.png" alt="user-icon" class="user-icon">
+                                    </ng-template>
+                                    <ng-template #displayIcon>
+                                        <img src="{{ uploadedImage }}" alt="user-icon" class="user-icon">
+                                    </ng-template>
                                 </div>
                                 <div class="text-center">
-                                    <input type="file" style="display: none" #fileInput accept="image/*"  />
-                                    <button mat-raised-button color="primary" class="file-select-button">
+                                    <input type="file" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput()"/>
+                                    <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
                                      <mat-icon>attach_file</mat-icon>
                                       アイコンを設定
                                     </button>

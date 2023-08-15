@@ -3,7 +3,7 @@ import { Signup } from './../../../models/signup';
 import { SpinnerService } from './../../../services/spinner/spinner.service';
 import { AuthService } from './../../../services/auth/auth.service';
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, ViewChild  } from '@angular/core';
 import { OverlayService } from 'src/app/services/overlay/overlay.service';
 
 @Component({
@@ -12,6 +12,11 @@ import { OverlayService } from 'src/app/services/overlay/overlay.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
+  @ViewChild('fileInput')
+  fileInput: any;
+  file: File | null = null;
+  uploadedImage: any = null;
+
   authForm: any;
   signupList = new Signup();
   hidePassword = true;
@@ -42,6 +47,28 @@ export class SignupComponent {
       this.spinnerService.stop();
       this.overlayService.disposeOverlay();
     })
+  }
+
+  public onClickFileInputButton(): void{
+    this.fileInput.nativeElement.click();
+  }
+
+  public onChangeFileInput(): void{
+    const reader = new FileReader();
+    const formData: FormData = new FormData();
+
+    //* Refer to this page as a sample - https://www.bezkoder.com/angular-14-image-upload-preview/
+    const files: { [key: string]: File } = this.fileInput.nativeElement.files;
+    this.file = files[0];
+    formData.append('icon', this.file);
+    this.signupList.picture = formData;
+
+    //* extract data as URL - 
+    //* refer to this page https://stackoverflow.com/questions/58746058/show-uploaded-image-immediately-after-upload-in-angular
+    reader.readAsDataURL(this.file);
+    reader.onload = () => {
+      this.uploadedImage = reader.result;
+    };
   }
 
   private _putRequirementsTogether(){
