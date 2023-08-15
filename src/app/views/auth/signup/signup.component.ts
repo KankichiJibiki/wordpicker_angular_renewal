@@ -1,10 +1,12 @@
-import { SignupValidations } from './../../../validations/sign-up-validations';
+import { SignupValidations2 } from 'src/app/validations/signup/sign-up-validations2';
+import { SignupValidations1 } from './../../../validations/signup/sign-up-validations1';
 import { Signup } from './../../../models/signup';
 import { SpinnerService } from './../../../services/spinner/spinner.service';
 import { AuthService } from './../../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { Component, ViewChild  } from '@angular/core';
 import { OverlayService } from 'src/app/services/overlay/overlay.service';
+import { AppConfigs } from 'src/app/constants/app-configs';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +19,8 @@ export class SignupComponent {
   file: File | null = null;
   uploadedImage: any = null;
 
-  authForm: any;
+  signup_validation_v1: any;
+  signup_validation_v2: any;
   signupList = new Signup();
   hidePassword = true;
 
@@ -26,9 +29,11 @@ export class SignupComponent {
     private overlayService: OverlayService,
     private spinnerService: SpinnerService,
     private router: Router,
-    private signupValidations: SignupValidations
+    private signupValidations1: SignupValidations1,
+    private signupValidations2: SignupValidations2
   ){
-    this.authForm = this.signupValidations.signupForm;
+    this.signup_validation_v1 = this.signupValidations1.signupFormV1;
+    this.signup_validation_v2 = this.signupValidations2.signupFormV2;
   }
 
   public signup(){
@@ -61,7 +66,7 @@ export class SignupComponent {
     const files: { [key: string]: File } = this.fileInput.nativeElement.files;
     this.file = files[0];
     formData.append('icon', this.file);
-    this.signupList.picture = formData;
+    this.signupList.picture = AppConfigs.S3_USER_ICON_KEY + "/" + this.signupList.username;
 
     //* extract data as URL - 
     //* refer to this page https://stackoverflow.com/questions/58746058/show-uploaded-image-immediately-after-upload-in-angular

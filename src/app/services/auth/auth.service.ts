@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Signin } from 'src/app/models/signin';
-import { appConfigs } from 'src/app/constants/app-configs';
+import { AppConfigs } from 'src/app/constants/app-configs';
 import { apiUrls } from 'src/app/constants/api-urls';
 import { Signup } from 'src/app/models/signup';
 
@@ -25,8 +25,8 @@ export class AuthService {
     //* see how to add global https://docs.amplify.aws/start/getting-started/setup/q/integration/angular/
     Amplify.configure({
       Auth: {
-        userPoolId: appConfigs.POOLID,
-        userPoolWebClientId: appConfigs.POOL_CLIENT_ID,
+        userPoolId: AppConfigs.POOLID,
+        userPoolWebClientId: AppConfigs.POOL_CLIENT_ID,
       }
     })
 

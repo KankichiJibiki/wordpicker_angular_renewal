@@ -2,7 +2,7 @@ export class Signup{
     username = '';
     email = '';
     password = '';
-    picture: FormData = {} as FormData;
+    picture = '';
     gender = '';
     birthdate = '';
     country_code = '';

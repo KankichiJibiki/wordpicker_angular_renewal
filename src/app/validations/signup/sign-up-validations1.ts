@@ -1,22 +1,22 @@
-import { Signup } from './../models/signup';
+import { Signup } from '../../models/signup';
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 
 @Injectable({
     providedIn: 'root'
 })
-export class SignupValidations{
-    signupForm: any;
+export class SignupValidations1{
+    signupFormV1: any;
     signupList = new Signup();
 
     constructor(){
-        this.signupForm = new FormGroup({
+        this.signupFormV1 = new FormGroup({
             username: new FormControl(this.signupList.username, [
                 Validators.required,
             ]),
             password: new FormControl(this.signupList.password, [
                 Validators.required,
-                Validators.minLength(10),
+                Validators.minLength(8),
             ]),
             email: new FormControl(this.signupList.email, [
                 Validators.required,
@@ -34,19 +34,7 @@ export class SignupValidations{
             phone_number: new FormControl(this.signupList.phone_number, [
                 Validators.required,
                 Validators.pattern('[- +()0-9]+')
-            ]),
-            state: new FormControl(this.signupList.state, [
-                Validators.required,
-            ]),
-            city: new FormControl(this.signupList.city, [
-                Validators.required,
-            ]),
-            address1: new FormControl(this.signupList.address1, [
-                Validators.required,
-            ]),
-            address2: new FormControl(this.signupList.address2, [
-                Validators.required,
-            ]),
+            ])
         })
     };
 }

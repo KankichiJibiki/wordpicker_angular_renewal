@@ -11,7 +11,12 @@
 .input_button{
     width: 50%;
     height: 3rem;
-    margin: 0 auto .7rem auto;
+    margin: .7rem auto .7rem auto;
+}
+
+.next-button{
+    width: 30%;
+    height: 2rem;
 }
 
 .user-icon{
