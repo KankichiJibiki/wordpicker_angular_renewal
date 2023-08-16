@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Component, ViewChild  } from '@angular/core';
 import { OverlayService } from 'src/app/services/overlay/overlay.service';
 import { AppConfigs } from 'src/app/constants/app-configs';
+import { DialogService } from 'src/app/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-signup',
@@ -29,6 +30,7 @@ export class SignupComponent {
     private overlayService: OverlayService,
     private spinnerService: SpinnerService,
     private router: Router,
+    private dialogService: DialogService,
     private signupValidations1: SignupValidations1,
     private signupValidations2: SignupValidations2
   ){
@@ -46,8 +48,9 @@ export class SignupComponent {
     .then(() => {
       console.log("Signed up");
       this.router.navigate(['/']);
-    }).catch(() =>{
-
+    }).catch((err: string) =>{
+      console.log(err);
+      this.dialogService.openErrDialog(err);
     }).finally(() => {
       this.spinnerService.stop();
       this.overlayService.disposeOverlay();
@@ -78,6 +81,6 @@ export class SignupComponent {
 
   private _putRequirementsTogether(){
     this.signupList.address = this.signupList.state + this.signupList.city + this.signupList.address1 + this.signupList.address2;
-    this.signupList.phone_number = this.signupList.country_code + this.signupList.phone_number;
+    this.signupList.completed_phone_number = this.signupList.country_code + this.signupList.phone_number;
   }
 }

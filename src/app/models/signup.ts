@@ -7,6 +7,7 @@ export class Signup{
     birthdate = '';
     country_code = '';
     phone_number = '';
+    completed_phone_number = '';
     address = '';
     state = '';
     city = '';

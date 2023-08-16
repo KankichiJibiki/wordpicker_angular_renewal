@@ -2,11 +2,11 @@ import { OverlayService } from './../overlay/overlay.service';
 import { SpinnerService } from './../spinner/spinner.service';
 import { Router } from '@angular/router';
 import { DialogResult } from './../../views/components/dialog/yes-or-no-dialog/yes-or-no-dialog.component';
-import { AppConfig } from './../../constants/appConfig';
 import { DialogService } from './../dialog/dialog.service';
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
 import { catchError, lastValueFrom, Observable, throwError } from "rxjs";
+import { AppConfigs } from 'src/app/constants/app-configs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor
@@ -33,11 +33,11 @@ export class AuthInterceptor implements HttpInterceptor
             catchError((err: any) => {
                 if(err instanceof HttpErrorResponse){
                     switch(err.status){
-                        case AppConfig.AUTH_ERROR : 
+                        case AppConfigs.AUTH_ERROR : 
                             console.log(err.status);
                             this.handle401Error(req, next);
                             break;
-                        case AppConfig.BAD_REQUEST:
+                        case AppConfigs.BAD_REQUEST:
                             console.log(err);
                             this.dialogService.openErrDialog(err.error.message);
                             break;

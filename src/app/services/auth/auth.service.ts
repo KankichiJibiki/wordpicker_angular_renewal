@@ -65,7 +65,7 @@ export class AuthService {
         picture: signupList.picture,
         address: signupList.address,
         birthdate: signupList.birthdate,
-        phone_number: signupList.phone_number,
+        phone_number: signupList.completed_phone_number,
         gender: signupList.gender,
       }
     });

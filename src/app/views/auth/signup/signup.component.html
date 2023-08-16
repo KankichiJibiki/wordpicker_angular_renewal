@@ -4,7 +4,7 @@
             <h2 class="text-center">
                 <div>Sign up following requirements</div>
             </h2>
-            <mat-stepper>
+            <mat-horizontal-stepper linear>
                 <!-- Step1 -->
                 <mat-step [stepControl]="signup_validation_v1" label="Account information">
                     <div class="flex-container p-1">
@@ -209,8 +209,7 @@
                       <button mat-button matStepperNext>Next</button>
                     </div>
                 </mat-step>
-            </mat-stepper>
-
+            </mat-horizontal-stepper>
         </mat-card-content>
     </mat-card>
 </main>
