@@ -4,9 +4,9 @@
             <h2 class="text-center">
                 <div>Sign up following requirements</div>
             </h2>
-            <mat-horizontal-stepper linear>
+            <mat-horizontal-stepper linear #stepper>
                 <!-- Step1 -->
-                <mat-step [stepControl]="signup_validation_v1" label="Account information">
+                <mat-step [stepControl]="signup_validation_v1" label="Account information" [editable]="!doneSignup">
                     <div class="flex-container p-1">
                         <form class="form-content" [formGroup]="signup_validation_v1">
                             <!-- Username & email -->
@@ -127,7 +127,7 @@
                     </div>
                 </mat-step>
                 <!-- Step2 -->
-                <mat-step [stepControl]="signup_validation_v2" label="Address">
+                <mat-step [stepControl]="signup_validation_v2" label="Address" [editable]="!doneSignup">
                     <div class="flex-container p-1">
                         <form class="form-content d-flex jt-between" [formGroup]="signup_validation_v2">
                             <!-- Left side -->

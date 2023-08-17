@@ -1,3 +1,4 @@
+import { DialogResult } from './../../components/dialog/yes-or-no-dialog/yes-or-no-dialog.component';
 import { SignupValidations2 } from 'src/app/validations/signup/sign-up-validations2';
 import { SignupValidations1 } from './../../../validations/signup/sign-up-validations1';
 import { Signup } from './../../../models/signup';
@@ -8,6 +9,9 @@ import { Component, ViewChild  } from '@angular/core';
 import { OverlayService } from 'src/app/services/overlay/overlay.service';
 import { AppConfigs } from 'src/app/constants/app-configs';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
+import { lastValueFrom } from 'rxjs';
+import { AppMessages } from 'src/app/constants/app-messages';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-signup',
@@ -15,8 +19,8 @@ import { DialogService } from 'src/app/services/dialog/dialog.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  @ViewChild('fileInput')
-  fileInput: any;
+  @ViewChild('fileInput') fileInput: any;
+  @ViewChild('stepper') myStepper: MatStepper | undefined;
   file: File | null = null;
   uploadedImage: any = null;
 
@@ -24,6 +28,7 @@ export class SignupComponent {
   signup_validation_v2: any;
   signupList = new Signup();
   hidePassword = true;
+  doneSignup: boolean = false;
 
   constructor(
     private aService: AuthService,
@@ -38,7 +43,12 @@ export class SignupComponent {
     this.signup_validation_v2 = this.signupValidations2.signupFormV2;
   }
 
-  public signup(){
+  public async signup(){
+    const yesOrNodialogRef = this.dialogService.openYesOrNoDialog(AppMessages.SIGNUP_CONSENT_MSG, true);
+    let res: DialogResult | undefined = await lastValueFrom(yesOrNodialogRef.afterClosed());
+
+    if(!res) return;
+
     this._putRequirementsTogether();
     console.log(this.signupList);
     this.overlayService.createOverlay();
@@ -47,14 +57,29 @@ export class SignupComponent {
     this.aService.signUp(this.signupList)
     .then(() => {
       console.log("Signed up");
-      this.router.navigate(['/']);
-    }).catch((err: string) =>{
+      this.doneSignup = true;
+      this.goForwardStep();
+      // this.router.navigate(['/']);
+    }).catch(async (err: string) =>{
       console.log(err);
-      this.dialogService.openErrDialog(err);
+      const dialogRef = this.dialogService.openErrDialog(err);
+
+      let res: DialogResult | undefined = await lastValueFrom(dialogRef.afterClosed());
+
+
+
     }).finally(() => {
       this.spinnerService.stop();
       this.overlayService.disposeOverlay();
     })
+  }
+
+  public goForwardStep(){
+    this.myStepper?.next();
+  }
+
+  public goBack(){
+    this.myStepper?.previous();
   }
 
   public onClickFileInputButton(): void{

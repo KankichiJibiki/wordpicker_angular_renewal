@@ -1,4 +1,6 @@
-.yesOrNoContent{
-    width: 220px;
-    height: 120px;
+.yet-or-no-content{
+    min-width: 400px;
+    max-width: 600px;
+    width: 90%;
+    height: fit-content;
 }

@@ -1,9 +1,12 @@
 <div class="error-content p-2">
-    <div class="text-center mb-3 f-1 warning">{{ data }}</div>
+    <h2 class="text-center my-2">Error</h2>
+    <div class="error-message">{{ data }}</div>
 
     <ng-container>
-        <div align="center" class="w-100 mt-4">
-            <button mat-raised-button (click)="closeDialog()">OK</button>
+        <div align="center" class="mt-4">
+            <button mat-raised-button class="w-80" color="accent" (click)="closeDialog()">
+                OK
+            </button>
         </div>
     </ng-container>
 </div>
