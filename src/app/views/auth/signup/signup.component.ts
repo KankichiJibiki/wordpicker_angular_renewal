@@ -12,6 +12,8 @@ import { DialogService } from 'src/app/services/dialog/dialog.service';
 import { lastValueFrom } from 'rxjs';
 import { AppMessages } from 'src/app/constants/app-messages';
 import { MatStepper } from '@angular/material/stepper';
+import { S3Service } from 'src/app/services/s3/s3.service';
+import { S3Image } from 'src/app/models/s3-image';
 
 @Component({
   selector: 'app-signup',
@@ -29,6 +31,9 @@ export class SignupComponent {
   signupList = new Signup();
   hidePassword = true;
   doneSignup: boolean = false;
+  verification_code: string = "";
+  uploadedResponse: Response | undefined;
+  s3_params = new S3Image();
 
   constructor(
     private aService: AuthService,
@@ -37,7 +42,8 @@ export class SignupComponent {
     private router: Router,
     private dialogService: DialogService,
     private signupValidations1: SignupValidations1,
-    private signupValidations2: SignupValidations2
+    private signupValidations2: SignupValidations2,
+    private s3Service: S3Service,
   ){
     this.signup_validation_v1 = this.signupValidations1.signupFormV1;
     this.signup_validation_v2 = this.signupValidations2.signupFormV2;
@@ -50,28 +56,32 @@ export class SignupComponent {
     if(!res) return;
 
     this._putRequirementsTogether();
-    console.log(this.signupList);
     this.overlayService.createOverlay();
     this.spinnerService.start();
+if(this.file != null)
+  this.uploadIconToS3(this.file);
+this.doneSignup = true;
+this.goForwardStep();
+this.spinnerService.stop();
+this.overlayService.disposeOverlay();
 
-    this.aService.signUp(this.signupList)
-    .then(() => {
-      console.log("Signed up");
-      this.doneSignup = true;
-      this.goForwardStep();
-      // this.router.navigate(['/']);
-    }).catch(async (err: string) =>{
-      console.log(err);
-      const dialogRef = this.dialogService.openErrDialog(err);
+    // this.aService.signUp(this.signupList)
+    // .then(async () => {
+    //   if(this.file != null)
+    //     this.uploadIconToS3(this.file);
 
-      let res: DialogResult | undefined = await lastValueFrom(dialogRef.afterClosed());
-
-
-
-    }).finally(() => {
-      this.spinnerService.stop();
-      this.overlayService.disposeOverlay();
-    })
+    //   console.log("Signed up");
+    //   this.doneSignup = true;
+    //   this.goForwardStep();
+    //   // this.router.navigate(['/']);
+    // }).catch(async (err: string) =>{
+    //   console.log(err);
+    //   const dialogRef = this.dialogService.openErrDialog(err);
+    //   let res: DialogResult | undefined = await lastValueFrom(dialogRef.afterClosed());
+    // }).finally(() => {
+    //   this.spinnerService.stop();
+    //   this.overlayService.disposeOverlay();
+    // })
   }
 
   public goForwardStep(){
@@ -88,12 +98,9 @@ export class SignupComponent {
 
   public onChangeFileInput(): void{
     const reader = new FileReader();
-    const formData: FormData = new FormData();
-
     //* Refer to this page as a sample - https://www.bezkoder.com/angular-14-image-upload-preview/
     const files: { [key: string]: File } = this.fileInput.nativeElement.files;
     this.file = files[0];
-    formData.append('icon', this.file);
     this.signupList.picture = AppConfigs.S3_USER_ICON_KEY + "/" + this.signupList.username;
 
     //* extract data as URL - 
@@ -102,6 +109,30 @@ export class SignupComponent {
     reader.onload = () => {
       this.uploadedImage = reader.result;
     };
+  }
+
+  public uploadIconToS3(file: File){
+    console.log(file);
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    this.s3_params.bucketName = AppConfigs.S3_WORD_PICKER_BUCKET_NAME;
+    this.s3_params.prefix = this.signupList.picture;
+    this.s3_params.file = formData;
+    console.log(this.s3_params);
+    console.log(formData.get('file'));
+
+    this.s3Service.uploadIconToS3(this.s3_params).subscribe({
+      next: async (res: Response) => {
+        if(!res.status){
+          const dialogRef = this.dialogService.openErrDialog(AppMessages.UPLOAD_ICON_FAILURE_SIGNUP);
+          await lastValueFrom(dialogRef.afterClosed());
+        }
+      },
+      error: async (error) =>{
+        const dialogRef = this.dialogService.openErrDialog(error);
+        await lastValueFrom(dialogRef.afterClosed());
+      }
+    })
   }
 
   private _putRequirementsTogether(){

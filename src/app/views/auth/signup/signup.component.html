@@ -142,7 +142,9 @@
                                     </ng-template>
                                 </div>
                                 <div class="text-center">
-                                    <input type="file" style="display: none" #fileInput accept="image/*" (change)="onChangeFileInput()"/>
+                                    <input type="file" style="display: none" #fileInput 
+                                    accept="image/*" 
+                                    (change)="onChangeFileInput()"/>
                                     <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
                                      <mat-icon>attach_file</mat-icon>
                                       アイコンを設定
@@ -204,9 +206,23 @@
                 </mat-step>
                 <!-- Step3 -->
                 <mat-step label="Step3">
-                    <div>
-                      <button mat-button matStepperPrevious>Back</button>
-                      <button mat-button matStepperNext>Next</button>
+                    <div class="ele-center w-50">
+                        <form>
+                            <mat-form-field class="ele-center signup-input">
+                                <mat-label>Verification code</mat-label>
+                                <input type="text" 
+                                matInput 
+                                name="verification_code" 
+                                [(ngModel)]="verification_code"
+                                formControlName="verification_code"
+                                >
+                                <!-- error -->
+                                <mat-error *ngIf="verification_code == ''" class="alert">Verification code is required</mat-error>
+                            </mat-form-field>
+                        </form>
+                        <div class="text-center">
+                          <button mat-button matStepperNext class="next-back-button" color="primary">Confirm</button>
+                        </div>
                     </div>
                 </mat-step>
             </mat-horizontal-stepper>

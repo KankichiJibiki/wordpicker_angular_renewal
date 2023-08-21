@@ -9,5 +9,6 @@ export class AppConfigs{
     static readonly POOL_CLIENT_ID: String = "1akr62cvj6trnh8de8crs1rfes";
 
     //* AWS S3
-    static readonly S3_USER_ICON_KEY: String = "user-icon";
+    static readonly S3_WORD_PICKER_BUCKET_NAME: string = "wordpicker-storage";
+    static readonly S3_USER_ICON_KEY: string = "user-icon";
 }
