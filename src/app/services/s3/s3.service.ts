@@ -14,12 +14,9 @@ export class S3Service {
     private http: HttpClient,
   ) { }
 
-  public uploadIconToS3(s3Params: S3Image): Observable<Response> {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'multipart/form-data');
-    headers.append('Accept', 'application/json');
+  public uploadIconToS3(formData: FormData): Observable<Response> {
     let apiUrl = `${environment.apiUrl}/${apiUrls.S3_URL}/${apiUrls.S3_ACTION_URL_REGISTER}`;
 
-    return this.http.post<Response>(apiUrl, s3Params, {headers: headers});
+    return this.http.post<Response>(apiUrl, formData);
   }
 }

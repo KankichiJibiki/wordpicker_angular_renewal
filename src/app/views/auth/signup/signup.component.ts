@@ -58,30 +58,23 @@ export class SignupComponent {
     this._putRequirementsTogether();
     this.overlayService.createOverlay();
     this.spinnerService.start();
-if(this.file != null)
-  this.uploadIconToS3(this.file);
-this.doneSignup = true;
-this.goForwardStep();
-this.spinnerService.stop();
-this.overlayService.disposeOverlay();
+    this.aService.signUp(this.signupList)
+    .then(async () => {
+      if(this.file != null)
+        this.uploadIconToS3(this.file);
 
-    // this.aService.signUp(this.signupList)
-    // .then(async () => {
-    //   if(this.file != null)
-    //     this.uploadIconToS3(this.file);
-
-    //   console.log("Signed up");
-    //   this.doneSignup = true;
-    //   this.goForwardStep();
-    //   // this.router.navigate(['/']);
-    // }).catch(async (err: string) =>{
-    //   console.log(err);
-    //   const dialogRef = this.dialogService.openErrDialog(err);
-    //   let res: DialogResult | undefined = await lastValueFrom(dialogRef.afterClosed());
-    // }).finally(() => {
-    //   this.spinnerService.stop();
-    //   this.overlayService.disposeOverlay();
-    // })
+      console.log("Signed up");
+      this.doneSignup = true;
+      this.goForwardStep();
+      // this.router.navigate(['/']);
+    }).catch(async (err: string) =>{
+      console.log(err);
+      const dialogRef = this.dialogService.openErrDialog(err);
+      let res: DialogResult | undefined = await lastValueFrom(dialogRef.afterClosed());
+    }).finally(() => {
+      this.spinnerService.stop();
+      this.overlayService.disposeOverlay();
+    })
   }
 
   public goForwardStep(){
@@ -113,16 +106,12 @@ this.overlayService.disposeOverlay();
 
   public uploadIconToS3(file: File){
     console.log(file);
-    const formData: FormData = new FormData();
-    formData.append('file', file);
-    this.s3_params.bucketName = AppConfigs.S3_WORD_PICKER_BUCKET_NAME;
-    this.s3_params.prefix = this.signupList.picture;
-    this.s3_params.file = formData;
-    console.log(this.s3_params);
-    console.log(formData.get('file'));
+    const formData = new FormData();
+    formData.append('file', file, this.signupList.picture);
 
-    this.s3Service.uploadIconToS3(this.s3_params).subscribe({
+    this.s3Service.uploadIconToS3(formData).subscribe({
       next: async (res: Response) => {
+        console.log(res);
         if(!res.status){
           const dialogRef = this.dialogService.openErrDialog(AppMessages.UPLOAD_ICON_FAILURE_SIGNUP);
           await lastValueFrom(dialogRef.afterClosed());

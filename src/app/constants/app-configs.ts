@@ -1,5 +1,6 @@
 export class AppConfigs{
     // Error
+    static readonly SUCCESS: number = 200;
     static readonly BAD_REQUEST: number = 400;
     static readonly AUTH_ERROR: number = 401;
     static readonly INTERNAL_SERVER_ERROR: number = 500;
