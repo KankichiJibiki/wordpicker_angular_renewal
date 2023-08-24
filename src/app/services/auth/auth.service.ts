@@ -70,4 +70,8 @@ export class AuthService {
       }
     });
   }
+
+  public confirmSignup(username: string, code: string): Promise<any>{
+    return Auth.confirmSignUp(username, code);
+  }
 }

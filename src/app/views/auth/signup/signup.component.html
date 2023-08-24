@@ -205,7 +205,7 @@
                     </section>
                 </mat-step>
                 <!-- Step3 -->
-                <mat-step label="Step3">
+                <mat-step label="Veryfication">
                     <div class="ele-center w-50">
                         <form>
                             <mat-form-field class="ele-center signup-input">
@@ -221,7 +221,7 @@
                             </mat-form-field>
                         </form>
                         <div class="text-center">
-                          <button mat-button matStepperNext class="next-back-button" color="primary">Confirm</button>
+                          <button mat-button matStepperNext class="next-back-button" color="primary" (click)="confirmSignup()">Confirm</button>
                         </div>
                     </div>
                 </mat-step>

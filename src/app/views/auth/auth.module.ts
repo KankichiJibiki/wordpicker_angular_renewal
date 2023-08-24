@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { MatStepperModule } from '@angular/material/stepper';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -31,6 +32,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatIconModule,
     MatSelectModule,
     MatStepperModule,
+    RouterModule,
   ]
 })
 export class AuthModule { }

@@ -59,15 +59,35 @@ export class SignupComponent {
     this.overlayService.createOverlay();
     this.spinnerService.start();
     this.aService.signUp(this.signupList)
-    .then(async () => {
+    .then(async (res) => {
       if(this.file != null)
         this.uploadIconToS3(this.file);
 
-      console.log("Signed up");
       this.doneSignup = true;
+      //* Notify the verification code
+      const dialogRef = this.dialogService.openYesOrNoDialog(AppMessages.SIGNUP_VERIFICATION_INFO, false);
+      await lastValueFrom(dialogRef.afterClosed());
+      
       this.goForwardStep();
-      // this.router.navigate(['/']);
     }).catch(async (err: string) =>{
+      console.log(err);
+      const dialogRef = this.dialogService.openErrDialog(err);
+      let res: DialogResult | undefined = await lastValueFrom(dialogRef.afterClosed());
+    }).finally(() => {
+      this.spinnerService.stop();
+      this.overlayService.disposeOverlay();
+    })
+  }
+
+  public confirmSignup(){
+    console.log(this.verification_code);
+    this.overlayService.createOverlay();
+    this.spinnerService.start();
+    this.aService.confirmSignup(this.signupList.username, this.verification_code)
+    .then(async (res) => {
+      console.log(res);
+      this.router.navigate(['/']);
+    }).catch(async (err: string) => {
       console.log(err);
       const dialogRef = this.dialogService.openErrDialog(err);
       let res: DialogResult | undefined = await lastValueFrom(dialogRef.afterClosed());
