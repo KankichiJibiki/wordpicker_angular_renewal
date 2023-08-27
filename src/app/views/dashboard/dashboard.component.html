@@ -1,1 +1,37 @@
-<p>dashboard works!</p>
+<main class="full-width ele-center">
+    <div class="dashboard-container w-90 ele-center">
+        <div id="user-panel">
+            <div class="account-info">
+                <img src="../../../assets/images/4887951171592699026.7d02884862c2d16aaad8bada650f405d.23052916.jpg" alt="user-thumbnail" class="thumbnail">
+                <div class="mt-6">kan.0408@outlook.jp</div>
+            </div>
+            <div class="user-history">
+                <div class="history">
+                    <div class="f-4">21</div>
+                    <div>登録単語セット</div>
+                </div>
+                <div class="history">
+                    <div class="f-4">12</div>
+                    <div>クイズ</div>
+                </div>
+                <div class="history">
+                    <div class="f-4">21</div>
+                    <div>ピック数</div>
+                </div>
+            </div>
+        </div>
+        <div id="main-features" class="d-flex jt-between f-wrap">
+            <ng-container *ngFor="let feature of features">
+                <a class="feature" routerLink="{{ feature.route }}">
+                    <div class="d-flex jt-between">
+                        <h4 class="feature-title">
+                            {{ feature.title }}
+                        </h4>
+                        <mat-icon>{{ feature.icon }}</mat-icon>
+                    </div>
+                    <p>{{ feature.paragraph }}</p>
+                </a>
+            </ng-container>
+        </div>
+    </div>
+</main>

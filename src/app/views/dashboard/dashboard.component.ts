@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MainFeature } from 'src/app/interfaces/main-feature';
+import { Features } from 'src/app/models/features';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  features: MainFeature[] = new Features().features;
 
 }

@@ -86,6 +86,8 @@ export class SignupComponent {
     this.aService.confirmSignup(this.signupList.username, this.verification_code)
     .then(async (res) => {
       console.log(res);
+      const dialogRef = this.dialogService.openYesOrNoDialog(res, false);
+      await lastValueFrom(dialogRef.afterClosed());
       this.router.navigate(['/']);
     }).catch(async (err: string) => {
       console.log(err);
@@ -146,6 +148,5 @@ export class SignupComponent {
 
   private _putRequirementsTogether(){
     this.signupList.address = this.signupList.state + this.signupList.city + this.signupList.address1 + this.signupList.address2;
-    this.signupList.completed_phone_number = this.signupList.country_code + this.signupList.phone_number;
   }
 }

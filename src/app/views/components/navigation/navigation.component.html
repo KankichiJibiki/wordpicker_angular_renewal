@@ -2,7 +2,7 @@
   <!-- Tool bar -->
   <mat-toolbar color="primary" class="d-flex jt-between">
     <div class="flex-container">
-      <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="authService.isAuthenticated()">
+      <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="authService.authenticationSubject.value">
         <mat-icon>menu</mat-icon>
       </button>
       <!-- menu content -->
@@ -13,7 +13,7 @@
             </mat-list-item>
             <mat-divider></mat-divider>
             <mat-list-item>
-              <a routerLink (click)="logout()" class="text-center">Logout</a>
+              <a routerLink (click)="signOut()" class="text-center">Logout</a>
             </mat-list-item>
             <mat-divider></mat-divider>
         </mat-list>
@@ -22,13 +22,13 @@
       <div>
         <a routerLink="mainpage" class="disable-text-decoration">
           Word Picker
-          <span *ngIf="authService.isAuthenticated()" class="home">
+          <span *ngIf="authService.authenticationSubject.value" class="home">
             <mat-icon class="home">home</mat-icon>
           </span>
         </a>
       </div>
     </div>
-    <ng-container *ngIf="authService.isAuthenticated()">
+    <ng-container *ngIf="authService.authenticationSubject.value">
       <div>
         <a routerLink="mypage" class="disable-text-decoration">
           <mat-icon class="user">

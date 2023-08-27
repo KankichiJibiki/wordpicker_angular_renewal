@@ -62,7 +62,7 @@
                                     formControlName="password"
                                     >
                                     <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-                                    <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+                                        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
                                     </button>
             
                                     <!-- error -->
@@ -70,33 +70,8 @@
                                     <mat-error *ngIf="signup_validation_v1.get('password').hasError('minlength')" class="alert">Password must be more than 10 characters</mat-error>
                                 </mat-form-field>
                             </div>
-                            <!-- phone number & email -->
+                            <!-- email -->
                             <div class="flex-container">
-                                <mat-form-field class="signup-input">
-                                    <mat-label>Country code</mat-label>
-                                    <mat-select 
-                                    name="country_code"
-                                    formControlName="country_code"
-                                    [(ngModel)]="signupList.country_code" 
-                                    >
-                                        <mat-option value="+81">+81 - Japan</mat-option>
-                                    </mat-select>
-            
-                                    <!-- error -->
-                                    <mat-error *ngIf="signup_validation_v1.get('country_code').hasError('required')" class="alert">Select your Country code</mat-error>
-                                </mat-form-field>
-                                <mat-form-field class="signup-input">
-                                    <mat-label>Phone number</mat-label>
-                                    <input type="tel" 
-                                    matInput 
-                                    name="phone_number" 
-                                    [(ngModel)]="signupList.phone_number"
-                                    formControlName="phone_number"
-                                    >
-                                    <!-- error -->
-                                    <mat-error *ngIf="signup_validation_v1.get('phone_number').hasError('required')" class="alert">Phone number is required</mat-error>
-                                    <mat-error *ngIf="signup_validation_v1.get('phone_number').hasError('pattern')" class="alert">Phone number is invalid</mat-error>
-                                </mat-form-field>
                                 <mat-form-field class="signup-input ele-center" >
                                     <mat-label>E-mail</mat-label>
                                     <input type="text" 
@@ -213,11 +188,16 @@
                                 <input type="text" 
                                 matInput 
                                 name="verification_code" 
+                                required
                                 [(ngModel)]="verification_code"
-                                formControlName="verification_code"
+                                #verification="ngModel"
                                 >
                                 <!-- error -->
-                                <mat-error *ngIf="verification_code == ''" class="alert">Verification code is required</mat-error>
+                                <mat-error *ngIf="verification.invalid && (verification.dirty || verification.touched)" class="alert text-center">
+                                    <div *ngIf="verification.errors?.['required']">
+                                        Verification code is required
+                                    </div>
+                                </mat-error>
                             </mat-form-field>
                         </form>
                         <div class="text-center">

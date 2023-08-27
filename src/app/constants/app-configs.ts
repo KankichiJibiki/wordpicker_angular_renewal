@@ -6,8 +6,8 @@ export class AppConfigs{
     static readonly INTERNAL_SERVER_ERROR: number = 500;
 
     //* AWS Cognito
-    static readonly POOLID: String = "ap-northeast-1_HKaBEvlqi";
-    static readonly POOL_CLIENT_ID: String = "1akr62cvj6trnh8de8crs1rfes";
+    static readonly POOLID: String = "ap-northeast-1_ESjt6XGLR";
+    static readonly POOL_CLIENT_ID: String = "lo5pn58onmf37bfgb04fa4hc7";
 
     //* AWS S3
     static readonly S3_WORD_PICKER_BUCKET_NAME: string = "wordpicker-storage";

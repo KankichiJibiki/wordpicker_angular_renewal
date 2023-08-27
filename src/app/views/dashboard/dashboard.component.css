@@ -1,0 +1,54 @@
+.dashboard-container{
+    width: 90%;
+    margin: 5rem auto 0 auto;
+}
+
+#user-panel{
+    border-radius: 1.0%;
+    background-color: #9b04c4;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    text-align: center;
+    height: 80px;
+}
+
+.account-info{
+    width: 45%;
+    display: flex;
+    justify-content: center;
+}
+
+.thumbnail{
+    width: 15%;
+    border: #63096b 3px solid;
+    border-radius: 45%;
+    margin: .4rem;
+}
+
+.user-history{
+    width: 53%;
+    height: 100%;
+}
+
+.history{
+    display: inline-block;
+    margin: 0 1rem;
+    justify-content: center;
+    line-height: 40px;
+}
+
+.feature{
+    width: 40%;
+    padding: .8rem;
+    border: 1px solid #63096b;
+    margin-bottom: 2rem;
+    text-decoration: none;
+    color: black;
+    background-color: #faf5fa;
+}

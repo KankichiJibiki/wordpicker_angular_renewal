@@ -30,10 +30,6 @@ export class SignupValidations1{
             ]),
             country_code: new FormControl(this.signupList.country_code, [
                 Validators.required,
-            ]),
-            phone_number: new FormControl(this.signupList.phone_number, [
-                Validators.required,
-                Validators.pattern('[- +()0-9]+')
             ])
         })
     };

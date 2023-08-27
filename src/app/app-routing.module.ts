@@ -4,11 +4,13 @@ import { SignupComponent } from './views/auth/signup/signup.component';
 import { IndexComponent } from './views/index/index.component';
 import { AuthGuard } from './guard/authGuard';
 import { SigninComponent } from './views/auth/signin/signin.component';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
 
 const routes: Routes = [
-  // {path:'', component: IndexComponent, canActivate: [AuthGuard]},
-  {path:'', component: SigninComponent},
+  {path:'signin', component: SigninComponent},
   {path:'signup', component: SignupComponent},
+  {path:'', component: IndexComponent, canActivate: [AuthGuard]},
+  {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
