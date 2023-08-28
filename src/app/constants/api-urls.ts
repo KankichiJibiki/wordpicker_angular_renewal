@@ -1,4 +1,4 @@
-export class apiUrls{
+export class ApiUrls{
     static readonly WORD_URL: string = "Words";
         static readonly WORD_ACTION_URL_GETALL: string = "GetWordsList";
         static readonly WORD_ACTION_URL_CREATE: string = "Create";

@@ -6,10 +6,12 @@ describe('IndexComponent', () => {
   let component: IndexComponent;
   let fixture: ComponentFixture<IndexComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [IndexComponent]
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ IndexComponent ]
+    })
+    .compileComponents();
+
     fixture = TestBed.createComponent(IndexComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

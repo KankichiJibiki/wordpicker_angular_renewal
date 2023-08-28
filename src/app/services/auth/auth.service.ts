@@ -7,7 +7,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Signin } from 'src/app/models/signin';
 import { AppConfigs } from 'src/app/constants/app-configs';
-import { apiUrls } from 'src/app/constants/api-urls';
 import { Signup } from 'src/app/models/signup';
 
 @Injectable({

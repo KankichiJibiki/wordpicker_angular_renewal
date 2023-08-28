@@ -14,18 +14,22 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit{
+  username: string | null = "";
   authenticated: boolean = false;
   public authenticationSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     public authService: AuthService,
-    private localStorageService: LocalstorageService,
     private router: Router,
     private dialogService: DialogService,
     private overlayService: OverlayService,
-    private spinnerService: SpinnerService
-  ){}
+    private spinnerService: SpinnerService,
+    private localstorageService: LocalstorageService
+  ){
+    this.username = this.localstorageService.get("username");
+  }
   ngOnInit(): void {
+    this.username = this.localstorageService.get("username");
     this.isAuthenticated();
   }
 
@@ -50,7 +54,7 @@ export class NavigationComponent implements OnInit{
 
     this.authService.signOut()
     .then((res) => {
-      this.localStorageService.remove('idToken');
+      this.localstorageService.remove('idToken');
       this.dialogService.openYesOrNoDialog('You signed out', false);
       this.router.navigate(['/signin'])
     }).catch((err) => {
