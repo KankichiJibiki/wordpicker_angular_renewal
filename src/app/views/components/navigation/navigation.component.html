@@ -2,8 +2,8 @@
   <!-- Tool bar -->
   <mat-toolbar color="primary" class="d-flex jt-between">
     <div class="flex-container">
-      <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="authService.authenticationSubject.value">
-        <mat-icon>menu</mat-icon>
+      <button class="list-icon" mat-icon-button [matMenuTriggerFor]="menu" *ngIf="authenticationSubject.value">
+        <mat-icon>view_list</mat-icon>
       </button>
       <!-- menu content -->
       <mat-menu #menu="matMenu">
@@ -22,13 +22,13 @@
       <div>
         <a routerLink="mainpage" class="disable-text-decoration">
           Word Picker
-          <span *ngIf="authService.authenticationSubject.value" class="home">
+          <span *ngIf="authenticationSubject.value" class="home">
             <mat-icon class="home">home</mat-icon>
           </span>
         </a>
       </div>
     </div>
-    <ng-container *ngIf="authService.authenticationSubject.value">
+    <ng-container *ngIf="authenticationSubject.value">
       <div>
         <a routerLink="mypage" class="disable-text-decoration">
           <mat-icon class="user">

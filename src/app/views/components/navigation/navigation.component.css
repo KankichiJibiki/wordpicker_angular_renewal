@@ -17,6 +17,15 @@
     position: relative;
 }
 
+.list-icon{
+    margin-right: .6rem;
+    opacity: .6;
+}
+
+.list-icon:hover{
+    cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
     #username{
         display: none;

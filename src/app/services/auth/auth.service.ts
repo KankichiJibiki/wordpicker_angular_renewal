@@ -31,13 +31,13 @@ export class AuthService {
       }
     })
 
-    this.username = localStorage.getItem(('userName'));
+    this.username = localStorage.getItem(('username'));
   }
 
-  public isAuthenticated(): boolean {
-    const token = localStorage.getItem('authToken');
-    return token != null;
-  }
+  // public isAuthenticated(): boolean {
+  //   const token = localStorage.getItem('authToken');
+  //   return token != null;
+  // }
 
   // public registerUser(userList: UserList): Observable<Response>{
   //   return this.http.post<Response>(`${environment.apiUrl}/${apiUrls.AUTH_URL}/${apiUrls.AUTH_ACTION_URL_REGISTER}`, userList);
@@ -90,19 +90,28 @@ export class AuthService {
     })
   }
 
-  // public isAuthenticated(): Promise<any>{
-  //   if(this.authenticationSubject.value){
-  //     return Promise.resolve(true);
-  //   } else {
-  //     return this.getUser()
-  //     .then((user: any) => {
-  //       if(user) return true;
-  //       else return false
-  //     }).catch(() => {
-  //       return false;
-  //     });
-  //   }
-  // }
+  public isAuthenticated(): Promise<any>{
+    if(this.authenticationSubject.value){
+      console.log(this.authenticationSubject.value)
+      return Promise.resolve(true);
+    } else {
+      return this.getUser()
+      .then((user: any) => {
+        if(user) {
+          console.log(true)
+          console.log(user)
+          return true;
+        }
+        else {
+          console.log(false)
+          return false
+        }
+      }).catch(() => {
+        console.log(false)
+        return false;
+      });
+    }
+  }
 
   public getUser(): Promise<any>{
     return Auth.currentUserInfo();

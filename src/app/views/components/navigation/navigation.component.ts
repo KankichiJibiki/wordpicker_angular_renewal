@@ -1,18 +1,21 @@
 import { DialogService } from 'src/app/services/dialog/dialog.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
 import { AppMessages } from 'src/app/constants/app-messages';
 import { OverlayService } from 'src/app/services/overlay/overlay.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit{
+  authenticated: boolean = false;
+  public authenticationSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     public authService: AuthService,
@@ -22,9 +25,23 @@ export class NavigationComponent {
     private overlayService: OverlayService,
     private spinnerService: SpinnerService
   ){}
+  ngOnInit(): void {
+    this.isAuthenticated();
+  }
 
   public moveToMypage(){
     
+  }
+
+  public isAuthenticated(){
+    this.authService.isAuthenticated()
+    .then((data) => { 
+      console.log(data)
+      this.authenticationSubject.next(data); 
+    }).catch(() => { 
+      console.log(false)
+      this.authenticationSubject.next(false); 
+    });
   }
 
   public signOut(){
@@ -42,6 +59,7 @@ export class NavigationComponent {
     }).finally(() => {
       this.spinnerService.stop();
       this.overlayService.disposeOverlay();
+      this.isAuthenticated();
     });
   }
 }

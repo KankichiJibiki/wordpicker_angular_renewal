@@ -40,9 +40,9 @@ export class SigninComponent {
     .then((res) => {
       console.log(res);
       let decoded = jwt_decode(res.signInUserSession.idToken.jwtToken);
+      let username = res.username
       this.localstorageService.set(decoded, "idToken");
-      let user = this.aService.getUser();
-      console.log(user);
+      this.localstorageService.set(username, "username")
       this.router.navigate(['/dashboard']);
     }).catch(async (err) => {
       console.log(err);
