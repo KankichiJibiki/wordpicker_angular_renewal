@@ -50,13 +50,13 @@ export class IndexComponent {
 
 
   ngOnInit(): void{
-    this.getWordsList();
-    this.getWordTypes();
-    this.userId = localStorage.getItem('userId');
-    this.username = localStorage.getItem('userName');
-    this.username = localStorage.getItem('authToken');
-    if(this.userId != null) this.inputWordSet.userId = +this.userId;
-    this.getUser();
+    // this.getWordsList();
+    // this.getWordTypes();
+    // this.userId = localStorage.getItem('userId');
+    // this.username = localStorage.getItem('userName');
+    // this.username = localStorage.getItem('authToken');
+    // if(this.userId != null) this.inputWordSet.userId = +this.userId;
+    // this.getUser();
   }
 
   public getUser() {

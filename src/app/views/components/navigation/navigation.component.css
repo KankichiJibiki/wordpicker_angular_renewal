@@ -12,14 +12,20 @@
     text-align: center;
 }
 
-.home, .user{
-    top: .25rem;
+.home{
+    top: .20rem;
+    position: relative;
+}
+
+.user{
+    top: .35rem;
     position: relative;
 }
 
 .list-icon{
     margin-right: .6rem;
     opacity: .6;
+
 }
 
 .list-icon:hover{

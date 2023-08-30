@@ -9,8 +9,8 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 const routes: Routes = [
   {path:'signin', component: SigninComponent},
   {path:'signup', component: SignupComponent},
-  {path:'', component: IndexComponent, canActivate: [AuthGuard]},
-  {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path:'wordpicker', component: IndexComponent, canActivate: [AuthGuard]},
+  {path:'', component: DashboardComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

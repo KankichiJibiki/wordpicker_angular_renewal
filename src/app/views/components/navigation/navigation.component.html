@@ -20,16 +20,16 @@
       </mat-menu>
 
       <div>
-        <a routerLink="mainpage" class="disable-text-decoration">
-          Word Picker
+        <a routerLink="/" class="disable-text-decoration">
           <span *ngIf="authenticationSubject.value" class="home">
             <mat-icon class="home">home</mat-icon>
           </span>
+          Word Picker
         </a>
       </div>
     </div>
     <ng-container *ngIf="authenticationSubject.value">
-      <div>
+      <div class="p-1">
         <a routerLink="mypage" class="disable-text-decoration">
           <mat-icon class="user">
             account_circle

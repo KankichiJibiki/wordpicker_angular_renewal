@@ -25,10 +25,12 @@ export class NavigationComponent implements OnInit{
     private overlayService: OverlayService,
     private spinnerService: SpinnerService,
     private localstorageService: LocalstorageService
-  ){
-    this.username = this.localstorageService.get("username");
-  }
+  ){}
+
   ngOnInit(): void {
+  }
+
+  ngOnChanges(): void {
     this.username = this.localstorageService.get("username");
     this.isAuthenticated();
   }

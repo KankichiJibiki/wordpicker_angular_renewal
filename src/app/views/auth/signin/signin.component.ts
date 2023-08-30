@@ -43,7 +43,7 @@ export class SigninComponent {
       let username = res.username
       this.localstorageService.set(decoded, "idToken");
       this.localstorageService.set(username, "username")
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/']);
     }).catch(async (err) => {
       console.log(err);
       const dialogRef = this.dialogService.openErrDialog(err);
