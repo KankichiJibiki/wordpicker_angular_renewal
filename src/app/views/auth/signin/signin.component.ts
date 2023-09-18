@@ -38,12 +38,9 @@ export class SigninComponent {
     this.spinnerService.start();
     this.aService.signin(this.signInList)
     .then((res) => {
-      console.log(res);
-      let decoded = jwt_decode(res.signInUserSession.idToken.jwtToken);
       let username = res.username
-      this.localstorageService.set(decoded, "idToken");
       this.localstorageService.set(username, "username")
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard']);
     }).catch(async (err) => {
       console.log(err);
       const dialogRef = this.dialogService.openErrDialog(err);
@@ -53,31 +50,5 @@ export class SigninComponent {
       this.spinnerService.stop();
     })
   }
-
-  // public login(){
-  //   this.overlayService.createOverlay();
-  //   this.spinnerService.start();
-
-  //   this.aService.loginUser(this.userList)
-  //   .subscribe({
-  //     next: (res: Response | any) => {
-  //       console.log(res);
-  //       this.spinnerService.start();
-  //       localStorage.clear();
-  //       localStorage.setItem('authToken', res.data.token);
-  //       localStorage.setItem('userId', res.data.id.toString());
-  //       localStorage.setItem('userName', res.data.username.toString());
-  //       this.router.navigate(['mainpage']);
-  //     },
-  //     error: (err: any) => {
-
-  //     },
-  //     complete: () => {
-  //       this.aService.username = localStorage.getItem(('userName'));
-  //       this.spinnerService.stop();
-  //       this.overlayService.disposeOverlay();
-  //     }
-  //   })
-  // }
 }
 

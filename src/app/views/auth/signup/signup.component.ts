@@ -88,7 +88,7 @@ export class SignupComponent {
       console.log(res);
       const dialogRef = this.dialogService.openYesOrNoDialog(res, false);
       await lastValueFrom(dialogRef.afterClosed());
-      this.router.navigate(['/']);
+      this.router.navigate(['/dashboard']);
     }).catch(async (err: string) => {
       console.log(err);
       const dialogRef = this.dialogService.openErrDialog(err);

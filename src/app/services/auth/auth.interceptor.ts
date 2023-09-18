@@ -1,3 +1,4 @@
+import { AppMessages } from './../../constants/app-messages';
 import { OverlayService } from './../overlay/overlay.service';
 import { SpinnerService } from './../spinner/spinner.service';
 import { Router } from '@angular/router';
@@ -55,11 +56,11 @@ export class AuthInterceptor implements HttpInterceptor
     private async handle401Error(request: HttpRequest<any>, next: HttpHandler){
         //* if dialog not opened already.
         if(!this.dialogService.isOpen) {
-            const dialogRef = this.dialogService.openErrDialog('Please Login again');
+            const dialogRef = this.dialogService.openErrDialog(AppMessages.NOT_AUTHORIZED);
             var res : DialogResult | undefined = await lastValueFrom(dialogRef.afterClosed());
         }
         localStorage.clear();
-        if(res) this.router.navigate(['login']);
+        if(res) this.router.navigate(['/']);
         this.dialogService.isOpen = false;
     }
 }

@@ -14,6 +14,7 @@ export class ApiUrls{
 
     static readonly TYPE_URL: string = "Type";
         static readonly TYPE_ACTION_URL_GET: string = "GetWordTypes";
+        
     static readonly S3_URL: string = "S3";
         static readonly S3_ACTION_URL_REGISTER: string = "UploadImage";
 }

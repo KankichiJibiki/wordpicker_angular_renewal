@@ -1,44 +1,38 @@
-<div id="navigation" class="flex-container">
-  <!-- Tool bar -->
-  <mat-toolbar color="primary" class="d-flex jt-between">
-    <div class="flex-container">
-      <button class="list-icon" mat-icon-button [matMenuTriggerFor]="menu" *ngIf="authenticationSubject.value">
-        <mat-icon>view_list</mat-icon>
-      </button>
-      <!-- menu content -->
-      <mat-menu #menu="matMenu">
-        <mat-list class="menu-container">
-            <mat-list-item>
-              <a routerLink (click)="moveToMypage()">My Page</a>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-            <mat-list-item>
-              <a routerLink (click)="signOut()" class="text-center">Logout</a>
-            </mat-list-item>
-            <mat-divider></mat-divider>
-        </mat-list>
-      </mat-menu>
+<!-- Navigation -->
+<mat-toolbar id="navigation" color="primary" class="d-flex jt-between">
+  <div class="flex-container">
+    <mat-icon (click)="sidenav.toggle()" class="menu-icon">
+      menu
+    </mat-icon>
+    <a routerLink="/dashboard" class="disable-text-decoration">
+      <div>Word Picker</div>
+    </a>
+  </div>
 
-      <div>
-        <a routerLink="/" class="disable-text-decoration">
-          <span *ngIf="authenticationSubject.value" class="home">
-            <mat-icon class="home">home</mat-icon>
-          </span>
-          Word Picker
-        </a>
-      </div>
+  <ng-container>
+    <div class="p-1">
+      <a routerLink="mypage" class="d-flex disable-text-decoration">
+        <mat-icon class="menu-icon">
+          account_circle
+        </mat-icon>
+        {{ username }}
+      </a>
     </div>
-    <ng-container *ngIf="authenticationSubject.value">
-      <div class="p-1">
-        <a routerLink="mypage" class="disable-text-decoration">
-          <mat-icon class="user">
-            account_circle
-          </mat-icon>
-          <span id="username">
-            {{ username }}
-          </span>
-        </a>
-      </div>
-    </ng-container>
-  </mat-toolbar>
-</div>
+  </ng-container>
+</mat-toolbar>
+
+<!-- Side navigation contents -->
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side">
+      <mat-nav-list>
+          <a mat-list-item routerLink=".">My Page</a>
+          <a mat-list-item (click)="signOut()">Logout</a>
+          <a mat-list-item routerLink=".">よくある質問</a>
+          <a mat-list-item routerLink=".">設定</a>
+      </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+      <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
