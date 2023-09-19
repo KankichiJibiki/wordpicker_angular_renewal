@@ -15,8 +15,8 @@ import { LocalstorageService } from '../localstorage/localstorage.service';
 })
 export class AuthService {
   loginData = new Signin();
-  username: string | null = null;
   public authenticationSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public usernameSubject: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(undefined);
 
   constructor(
     private http : HttpClient,
@@ -31,7 +31,6 @@ export class AuthService {
         userPoolWebClientId: AppConfigs.POOL_CLIENT_ID,
       }
     })
-    this.username = localStorage.getItem('username');
     this.isAuthenticated();
   }
 
@@ -75,6 +74,8 @@ export class AuthService {
     return Auth.signIn(signinList.username, signinList.password)
     .then((res) => {
       this.authenticationSubject.next(true);
+      this.usernameSubject?.next(signinList.username);
+      this.localstorageService.set(signinList.username, "username")
       return res;
     });
   }
@@ -91,6 +92,9 @@ export class AuthService {
     return Auth.currentAuthenticatedUser()
     .then((res) => {
       this.authenticationSubject.next(true);
+      let username = this.localstorageService.get("username");
+      if(username != null)
+        this.usernameSubject.next(username);
       return true;
     })
     .catch((err) => {

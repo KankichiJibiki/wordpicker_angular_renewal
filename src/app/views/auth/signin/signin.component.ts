@@ -39,7 +39,6 @@ export class SigninComponent {
     this.aService.signin(this.signInList)
     .then((res) => {
       let username = res.username
-      this.localstorageService.set(username, "username")
       this.router.navigate(['/dashboard']);
     }).catch(async (err) => {
       console.log(err);
