@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { Signin } from 'src/app/models/signin';
 import { AppConfigs } from 'src/app/constants/app-configs';
 import { Signup } from 'src/app/models/signup';
+import { LocalstorageService } from '../localstorage/localstorage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class AuthService {
 
   constructor(
     private http : HttpClient,
-    private router: Router
+    private router: Router,
+    private localstorageService: LocalstorageService
   ) {
     //Cognito
     //* see how to add global https://docs.amplify.aws/start/getting-started/setup/q/integration/angular/
@@ -29,14 +31,9 @@ export class AuthService {
         userPoolWebClientId: AppConfigs.POOL_CLIENT_ID,
       }
     })
-
-    this.username = localStorage.getItem(('username'));
+    this.username = localStorage.getItem('username');
+    this.isAuthenticated();
   }
-
-  // public isAuthenticated(): boolean {
-  //   const token = localStorage.getItem('authToken');
-  //   return token != null;
-  // }
 
   // public registerUser(userList: UserList): Observable<Response>{
   //   return this.http.post<Response>(`${environment.apiUrl}/${apiUrls.AUTH_URL}/${apiUrls.AUTH_ACTION_URL_REGISTER}`, userList);
@@ -86,30 +83,21 @@ export class AuthService {
     return Auth.signOut()
     .then((res) => {
       this.authenticationSubject.next(false);
+      this.localstorageService.clearAll();
     })
   }
 
   public isAuthenticated(): Promise<any>{
-    if(this.authenticationSubject.value){
-      console.log(this.authenticationSubject.value)
-      return Promise.resolve(true);
-    } else {
-      return this.getUser()
-      .then((user: any) => {
-        if(user) {
-          console.log(true)
-          console.log(user)
-          return true;
-        }
-        else {
-          console.log(false)
-          return false
-        }
-      }).catch(() => {
-        console.log(false)
-        return false;
-      });
-    }
+    return Auth.currentAuthenticatedUser()
+    .then((res) => {
+      this.authenticationSubject.next(true);
+      return true;
+    })
+    .catch((err) => {
+      console.log(err);
+      this.authenticationSubject.next(false);
+      return false;
+    })
   }
 
   public getUser(): Promise<any>{

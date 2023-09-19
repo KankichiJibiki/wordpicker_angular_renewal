@@ -1,7 +1,7 @@
 <!-- Navigation -->
 <mat-toolbar id="navigation" color="primary" class="d-flex jt-between">
   <div class="flex-container">
-    <mat-icon (click)="sidenav.toggle()" class="menu-icon">
+    <mat-icon (click)="sidenav.toggle()" class="menu-icon" *ngIf="authService.authenticationSubject.value">
       menu
     </mat-icon>
     <a routerLink="/dashboard" class="disable-text-decoration">
@@ -9,13 +9,13 @@
     </a>
   </div>
 
-  <ng-container>
+  <ng-container *ngIf="authService.authenticationSubject.value">
     <div class="p-1">
       <a routerLink="mypage" class="d-flex disable-text-decoration">
         <mat-icon class="menu-icon">
           account_circle
         </mat-icon>
-        {{ username }}
+        {{ authService.username }}
       </a>
     </div>
   </ng-container>

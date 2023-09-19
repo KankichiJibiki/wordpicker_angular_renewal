@@ -28,7 +28,7 @@
                         [(ngModel)]="signInList.password"
                         formControlName="password"
                         >
-                        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                        <button type="button" mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
                             <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
                         </button>
 

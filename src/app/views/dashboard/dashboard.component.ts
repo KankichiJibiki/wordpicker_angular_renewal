@@ -9,5 +9,4 @@ import { Features } from 'src/app/models/features';
 })
 export class DashboardComponent {
   features: MainFeature[] = new Features().features;
-
 }

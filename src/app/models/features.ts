@@ -6,7 +6,7 @@ export class Features{
       title: "ワードセット作成",
       icon: "arrow_back",
       paragraph: "英語辞書にワードセットを登録して自分だけの'辞書'を作ろう！ 覚えられない単語を登録してWord pickerで出現させることができるよ。",
-      route: "",
+      route: "/index",
     },
     {
       title: "クイズ",

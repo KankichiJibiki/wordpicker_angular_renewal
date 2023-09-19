@@ -4,8 +4,7 @@
 }
 
 #user-panel{
-    border-radius: 1.0%;
-    background-color: #9b04c4;
+    background-color: #616eb9;
     display: flex;
     justify-content: space-around;
     align-content: center;
@@ -13,9 +12,9 @@
     color: #fff;
     font-size: 1.2rem;
     margin-bottom: 2rem;
-    padding: 1.5rem;
+    padding: .9rem;
     text-align: center;
-    height: 80px;
+    height: 80%;
 }
 
 .account-info{
@@ -26,8 +25,8 @@
 
 .thumbnail{
     width: 15%;
-    border: #63096b 3px solid;
-    border-radius: 45%;
+    border: #ce10df 3px solid;
+    border-radius: 50%;
     margin: .4rem;
 }
 
@@ -46,9 +45,9 @@
 .feature{
     width: 40%;
     padding: .8rem;
-    border: 1px solid #63096b;
+    border: 1px solid #5e6cbb;
     margin-bottom: 2rem;
     text-decoration: none;
     color: black;
-    background-color: #faf5fa;
+    background-color: #e0e4fc;
 }

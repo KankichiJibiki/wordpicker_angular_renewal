@@ -18,6 +18,7 @@
 }
 .menu-icon:hover{
     cursor: pointer;
+    opacity: .8;
 }
 
 mat-sidenav-content {
