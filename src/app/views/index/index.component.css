@@ -1,15 +1,22 @@
 .register-container{
+    width: 90%;
+    margin: 4.5rem auto;
+}
+
+.create-actions-container{
 
 }
 
-.register-title{
+.add-create-card-container{
+    padding: .5rem;
     width: 100%;
-    height: 210px;
-    padding: 1.5rem;
-    margin-top: 3.5rem;
-    color: #3d4fb8;
+    margin: 0 auto;
 }
 
-.side-navigation-menu{
-    
+.input-button{
+    width: 50%;
+    height: 3rem;
+    margin: .7rem auto .7rem auto;
 }
+
+

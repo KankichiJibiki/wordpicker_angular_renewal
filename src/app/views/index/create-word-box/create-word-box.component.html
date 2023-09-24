@@ -1,0 +1,64 @@
+
+<mat-card class="word-create-container">
+    <mat-card-header class="word-create-header">
+        <mat-card-title>
+            Word: {{ wordSet.word }}
+        </mat-card-title>
+        <mat-card-subtitle>
+            Type: {{ wordSet.wordType }}
+        </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content class="word-create-main">
+        <form [formGroup]="create_word_validations">
+            <!-- 1.Word -->
+            <mat-form-field class="input-general">
+                <mat-label>Word</mat-label>
+                <input type="text" matInput name="word" [(ngModel)]="wordSet.word" formControlName="word" placeholder="Hello">
+                <mat-error *ngIf="create_word_validations.get('word').hasError('required')">
+                    Word is required
+                </mat-error>
+            </mat-form-field>
+            <!-- 2.Meaning -->
+            <div class="d-flex jt-between">
+                <mat-form-field class="text-input-meaning">
+                    <mat-label>Meaning</mat-label>
+                    <textarea name="meaning" matInput placeholder="こんにちわ" [(ngModel)]="wordSet.meaning" formControlName="meaning"></textarea>
+                    <mat-error *ngIf="create_word_validations.get('meaning').hasError('required')">
+                        Word is required
+                    </mat-error>
+                </mat-form-field>
+                <button mat-button class="auto-fill">
+                    <mat-icon>search</mat-icon>
+                    Auto-fill
+                </button>
+            </div>
+            <!-- 3.Use case -->
+            <div class="d-flex jt-between">
+                <mat-form-field class="text-input-use-case">
+                    <mat-label>Use-case</mat-label>
+                    <textarea name="useCase" matInput placeholder="Hello Mike." [(ngModel)]="wordSet.useCase" formControlName="useCase"></textarea>
+                </mat-form-field>
+                <button mat-button class="auto-fill">
+                    <mat-icon>search</mat-icon>
+                    Auto-fill
+                </button>
+            </div>
+            <!-- 4.Word type and Favorite -->
+            <div class="d-flex jt-between">
+                <mat-form-field class="text-input-select">
+                    <mat-label>Word type</mat-label>
+                    <mat-select [(ngModel)]="wordSet.wordType" placeholder="E.g) Verb" name="wordTypeId" formControlName="wordTypeId">
+                        <mat-option [value]="1">Verb</mat-option>
+                        <mat-option [value]="2">Adjective</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="create_word_validations.get('wordTypeId').hasError('required')">
+                        Word type is required
+                    </mat-error>
+                </mat-form-field>
+                <mat-checkbox [(ngModel)]="wordSet.favorite_flg" value="1" class="favorite-checkbox" formControlName="favorite_flg">
+                    Add to Favorite list
+                </mat-checkbox>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

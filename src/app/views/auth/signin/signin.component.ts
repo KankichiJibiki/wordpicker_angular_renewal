@@ -1,4 +1,3 @@
-import { LocalstorageService } from './../../../services/localstorage/localstorage.service';
 import { Signin } from './../../../models/signin';
 import { DialogService } from './../../../services/dialog/dialog.service';
 import { SpinnerService } from './../../../services/spinner/spinner.service';
@@ -8,7 +7,6 @@ import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { SignInValidations } from 'src/app/validations/sign-in-validations';
 import { OverlayService } from 'src/app/services/overlay/overlay.service';
-import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-signin',
@@ -28,7 +26,6 @@ export class SigninComponent {
     public spinnerService: SpinnerService,
     private overlayService: OverlayService,
     private dialogService: DialogService,
-    private localstorageService: LocalstorageService,
   ){
     this.authForm = this.signinV.loginForm;
   }

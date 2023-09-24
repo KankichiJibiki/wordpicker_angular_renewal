@@ -2,7 +2,6 @@ import { DialogResult, YesOrNoDialogComponent } from './../../views/components/d
 import { ErrorDialogComponent } from './../../views/components/dialog/error-dialog/error-dialog.component';
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { SlotDialogComponent } from 'src/app/views/components/dialog/slot-dialog/slot-dialog.component';
 import { WordSet } from 'src/app/models/word-set';
 
 @Injectable({
@@ -14,12 +13,6 @@ export class DialogService {
   constructor(
     private dialog: MatDialog,
   ) { }
-
-  public openSlotDialog(wordSet: WordSet[]): void{
-    this.dialog.open(SlotDialogComponent, {
-      data: wordSet,
-    });
-  }
 
   public openErrDialog(errMsg: string): MatDialogRef<ErrorDialogComponent, DialogResult> | any{
     this.isOpen = true;

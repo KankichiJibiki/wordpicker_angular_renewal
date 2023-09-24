@@ -34,23 +34,6 @@ export class AuthService {
     this.isAuthenticated();
   }
 
-  // public registerUser(userList: UserList): Observable<Response>{
-  //   return this.http.post<Response>(`${environment.apiUrl}/${apiUrls.AUTH_URL}/${apiUrls.AUTH_ACTION_URL_REGISTER}`, userList);
-  // }
-
-  // public loginUser(userList: UserList): Observable<Response>{
-  //   return this.http.post<Response>(`${environment.apiUrl}/${apiUrls.AUTH_URL}/${apiUrls.AUTH_ACTION_URL_LOGIN}`, userList);
-  // }
-
-  // public logout(){
-  //   localStorage.clear();
-  //   this.router.navigate(['login']);
-  // }
-
-  // public getUser(userParams: UserList){
-  //   return this.http.post<Response>(`${environment.apiUrl}/${apiUrls.AUTH_URL}/${apiUrls.AUTH_ACTION_URL_GET}`, userParams);
-  // }
-
   public signUp(signupList: Signup): Promise<any>{
     //* see how to pass paramters -> https://docs.amplify.aws/lib/auth/emailpassword/q/platform/js/#sign-up
     return Auth.signUp({

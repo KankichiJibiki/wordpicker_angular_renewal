@@ -1,11 +1,12 @@
 export class WordSet{
     id?: number;
-    voca = "";
-    definition = "";
+    word = "";
+    meaning = "";
+    useCase = "";
+    favorite_flg = 0;
+    wordType = "";
+    wordTypeID?: number;
+    username = "";
     created_date?: Date;
     updated_date?: Date;
-    type?:string[];
-    typeId?: number;
-    user?:string[];
-    userId?: number;
 }
