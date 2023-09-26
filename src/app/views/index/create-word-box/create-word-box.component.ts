@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { WordSet } from 'src/app/models/word-set';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
@@ -12,9 +13,8 @@ import { CreateWordValidatoins } from 'src/app/validations/create-word-validatoi
   templateUrl: './create-word-box.component.html',
   styleUrls: ['./create-word-box.component.css']
 })
-export class CreateWordBoxComponent {
-  wordSet = new WordSet();
-  create_word_validations: any;
+export class CreateWordBoxComponent implements OnInit{
+  @Input() wordSet!: FormGroup;
 
   constructor(
     private wService: WordSetService,
@@ -23,8 +23,11 @@ export class CreateWordBoxComponent {
     public spinnerService: SpinnerService,
     private overlayService: OverlayService,
     private createWordValidations: CreateWordValidatoins
-  ){
-    this.create_word_validations = this.createWordValidations.createWordForm;
+  ){}
+
+  ngOnInit(): void {
+
   }
 
 }
+

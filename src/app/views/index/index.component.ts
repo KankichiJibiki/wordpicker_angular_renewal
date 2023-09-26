@@ -1,10 +1,7 @@
-import { Component } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
-import { DialogResult } from '../components/dialog/yes-or-no-dialog/yes-or-no-dialog.component';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
-import { WordType } from 'src/app/models/word-type';
-import { Signin } from 'src/app/models/signin';
-import { UserList } from 'src/app/models/user-list';
+import { AppMessages } from 'src/app/constants/app-messages';
 import { WordSet } from 'src/app/models/word-set';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
@@ -18,8 +15,8 @@ import { CreateWordValidatoins } from 'src/app/validations/create-word-validatoi
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css']
 })
-export class IndexComponent {
-  wordSetList: WordSet[] = [];
+export class IndexComponent implements OnInit{
+  wordSetList: FormGroup[] = [];
 
   constructor(
     public wService: WordSetService,
@@ -29,12 +26,22 @@ export class IndexComponent {
     private overlayService: OverlayService,
     private createWordValidations: CreateWordValidatoins
   ){
+  }
 
+  ngOnInit(): void {
+    this.wordSetList.push(this.wService.addWordForm());
   }
 
   public addCreateBox(): void{
-    console.log(this.wordSetList);
-    const newWordSet = new WordSet();
+    this.wordSetList.push(this.wService.addWordForm());
   }
 
+  public async resetWordList(): Promise<void>{
+    const dialogRef = this.dialogService.openYesOrNoDialog(AppMessages.WORD_RESET_BOX, true);
+    let dialogResult = await lastValueFrom(dialogRef.afterClosed());
+    if(!dialogResult) return;
+
+    this.wordSetList = [];
+    this.wordSetList.push(this.wService.addWordForm());
+  }
 }

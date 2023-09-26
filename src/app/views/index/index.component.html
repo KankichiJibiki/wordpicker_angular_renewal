@@ -4,14 +4,14 @@
     </div>
     <div class="add-create-card-container">
         <ng-container *ngFor="let wordBox of wordSetList">
-            <app-create-word-box></app-create-word-box>
+            <app-create-word-box [wordSet]="wordBox"></app-create-word-box>
         </ng-container>
         <button mat-icon-button class="add-card-button" color="accent" (click)="addCreateBox()">
             <mat-icon>add</mat-icon>
         </button>
     </div>
     <div class="create-actions-container">
-        <button mat-raised-button class="input-button">Cancel</button>
+        <button mat-raised-button class="input-button" (click)="resetWordList()">Reset</button>
         <button mat-raised-button color="primary" class="input-button">All Set</button>
     </div>
  </main>
