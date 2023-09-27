@@ -47,11 +47,11 @@
             <div class="d-flex jt-between">
                 <mat-form-field class="text-input-select">
                     <mat-label>Word type</mat-label>
-                    <mat-select [(ngModel)]="wordSet.value.wordType" placeholder="E.g) Verb" name="wordTypeId" formControlName="wordTypeId">
+                    <mat-select [(ngModel)]="wordSet.value.typeId" placeholder="E.g) Verb" name="typeId" formControlName="typeId">
                         <mat-option [value]="1">Verb</mat-option>
                         <mat-option [value]="2">Adjective</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="wordSet.get('wordTypeId')?.hasError('required')">
+                    <mat-error *ngIf="wordSet.get('typeId')?.hasError('required')">
                         Word type is required
                     </mat-error>
                 </mat-form-field>

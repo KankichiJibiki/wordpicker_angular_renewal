@@ -3,7 +3,7 @@
         <div class="page-title">Register Words</div>
     </div>
     <div class="add-create-card-container">
-        <ng-container *ngFor="let wordBox of wordSetList">
+        <ng-container *ngFor="let wordBox of wordFormGroup">
             <app-create-word-box [wordSet]="wordBox"></app-create-word-box>
         </ng-container>
         <button mat-icon-button class="add-card-button" color="accent" (click)="addCreateBox()">
@@ -12,6 +12,6 @@
     </div>
     <div class="create-actions-container">
         <button mat-raised-button class="input-button" (click)="resetWordList()">Reset</button>
-        <button mat-raised-button color="primary" class="input-button">All Set</button>
+        <button mat-raised-button color="primary" class="input-button" (click)="setToCreateWord()">All Set</button>
     </div>
  </main>

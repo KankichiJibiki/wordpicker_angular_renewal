@@ -6,6 +6,7 @@ export class AppMessages{
     
     //**Word  */
     static readonly WORD_RESET_BOX: string = 'Are you sure to reset All?'
+    static readonly WORD_PROCEED_CREATE: string = 'All set to proceed?'
     
     // Error
     static readonly SIGNOUT_ERROR: string = 'Sign out error'

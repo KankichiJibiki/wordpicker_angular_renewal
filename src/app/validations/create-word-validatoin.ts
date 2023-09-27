@@ -6,9 +6,6 @@ import { WordSet } from '../models/word-set';
     providedIn: 'root'
 })
 export class CreateWordValidatoins{
-
-    constructor(){};
-
     public createWordForm(){
         const wordSet = new WordSet();
         return new FormGroup({
@@ -26,7 +23,7 @@ export class CreateWordValidatoins{
             favorite_flg: new FormControl(wordSet.favorite_flg, [
                 Validators.pattern('[01]')
             ]),
-            wordTypeId: new FormControl(wordSet.wordTypeID, [
+            typeId: new FormControl(wordSet.typeId, [
                 Validators.required,
                 Validators.pattern('[0-9]')
             ])

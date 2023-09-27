@@ -5,7 +5,7 @@ export class WordSet{
     useCase = "";
     favorite_flg = 0;
     wordType = "";
-    wordTypeID?: number;
+    typeId?: number;
     username = "";
     created_date?: Date;
     updated_date?: Date;
