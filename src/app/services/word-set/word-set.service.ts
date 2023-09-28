@@ -21,7 +21,11 @@ export class WordSetService {
     return this.createWordValidations.createWordForm();
   }
 
-  public createWordList(wordSetList: FormGroup[]){
+  public getWordTypes(){
+    
+  }
+
+  public createWordList(wordSetList: WordSet[]){
     let apiUrl = `${environment.apiUrl}/${ApiUrls.WORDLIST_URL}/${ApiUrls.WORDLIST_ACTION_URL_CREATE}`;
     return this.http.post<Response>(apiUrl, wordSetList);
   }

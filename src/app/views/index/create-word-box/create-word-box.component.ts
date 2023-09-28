@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth/auth.service';
 
@@ -10,10 +10,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class CreateWordBoxComponent{
   @Input() wordSet!: FormGroup;
 
-  constructor(
-    public authService: AuthService
-  ){
-    this.wordSet.value.username = authService.usernameSubject.value;
-  }
+  constructor(){}
 }
 

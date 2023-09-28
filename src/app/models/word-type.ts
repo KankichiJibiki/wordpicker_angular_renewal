@@ -1,4 +1,5 @@
 export class WordType{
     id?: number;
-    wordType = "";
+    type_jp = "";
+    type_en = "";
 }

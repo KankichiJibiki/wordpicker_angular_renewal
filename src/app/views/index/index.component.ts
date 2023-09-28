@@ -25,6 +25,7 @@ export class IndexComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
+    
     this.wordFormGroup.push(this.wordService.addWordForm());
   }
 
@@ -41,16 +42,16 @@ export class IndexComponent implements OnInit{
     this.wordFormGroup.forEach(wordBox => {
       this.wordSetToCreate.push(wordBox.value);
     });
-    // this.overlayService.createOverlay();
+    this.overlayService.createOverlay();
     console.log(this.wordSetToCreate);
-    // this.wordService.createWordList(this.wordSetList).subscribe({
-    //   next: (res: Response) => {
+    this.wordService.createWordList(this.wordSetToCreate).subscribe({
+      next: (res: Response) => {
 
-    //   },
-    //   complete: () => { 
-
-    //   }
-    // });
+      },
+      complete: () => { 
+        this.overlayService.disposeOverlay();
+      }
+    });
   }
 
   public async resetWordList(): Promise<void>{

@@ -16,7 +16,7 @@ import { LocalstorageService } from '../localstorage/localstorage.service';
 export class AuthService {
   loginData = new Signin();
   public authenticationSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public usernameSubject: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(undefined);
+  public usernameSubject: BehaviorSubject<string> = new BehaviorSubject<string>("");
 
   constructor(
     private http : HttpClient,
