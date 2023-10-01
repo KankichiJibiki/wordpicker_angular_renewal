@@ -18,10 +18,11 @@ import { ProgressSpinnerComponent } from './views/components/progress-spinner/pr
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IndexModule } from './views/index/index.module';
 import { DashboardModule } from './views/dashboard/dashboard.module';
+import { ErrorInterceptor } from './services/error/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,13 @@ import { DashboardModule } from './views/dashboard/dashboard.module';
     MatDividerModule,
     MatListModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

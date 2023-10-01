@@ -4,9 +4,6 @@
         <mat-card-title>
             Word: {{ wordSet.value.word }}
         </mat-card-title>
-        <mat-card-subtitle>
-            Type: {{ wordSet.value.wordType }}
-        </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="word-create-main">
         <form [formGroup]="wordSet">
@@ -43,19 +40,31 @@
                     Auto-fill
                 </button>
             </div>
-            <!-- 4.Word type and Favorite -->
+            <!-- 4.Synonymous -->
+            <div class="d-flex jt-between">
+                <mat-form-field class="text-input-use-case">
+                    <mat-label>Synonym</mat-label>
+                    <textarea name="synonymous" matInput placeholder="Hi, Hey" [(ngModel)]="wordSet.value.synonymous" formControlName="synonymous"></textarea>
+                </mat-form-field>
+                <button mat-button class="auto-fill">
+                    <mat-icon>search</mat-icon>
+                    Auto-fill
+                </button>
+            </div>
+            <!-- 5.Word type and Favorite -->
             <div class="d-flex jt-between">
                 <mat-form-field class="text-input-select">
                     <mat-label>Word type</mat-label>
                     <mat-select [(ngModel)]="wordSet.value.typeId" placeholder="E.g) Verb" name="typeId" formControlName="typeId">
-                        <mat-option [value]="1">Verb</mat-option>
-                        <mat-option [value]="2">Adjective</mat-option>
+                        <ng-container *ngFor="let wordType of wordService.wordTypesList">
+                            <mat-option [value]="wordType.id">{{ wordType.type_jp }}</mat-option>
+                        </ng-container>
                     </mat-select>
                     <mat-error *ngIf="wordSet.get('typeId')?.hasError('required')">
                         Word type is required
                     </mat-error>
                 </mat-form-field>
-                <mat-checkbox [(ngModel)]="wordSet.value.favorite_flg" value="1" class="favorite-checkbox" formControlName="favorite_flg">
+                <mat-checkbox [(ngModel)]="wordSet.value.favoriteFlg" value="1" class="favorite-checkbox" formControlName="favorite_flg">
                     Add to Favorite list
                 </mat-checkbox>
             </div>

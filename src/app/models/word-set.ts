@@ -3,7 +3,8 @@ export class WordSet{
     word = "";
     meaning = "";
     useCase = "";
-    favorite_flg = 0;
+    synonymous = "";
+    favoriteFlg = 0;
     wordType = "";
     typeId?: number;
     username = "";

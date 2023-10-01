@@ -25,13 +25,30 @@ export class IndexComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    
-    this.wordFormGroup.push(this.wordService.addWordForm());
+    this.initializeWordBox();
+  }
+
+  private initializeWordBox(){
+    this.overlayService.createOverlay();
+    this.spinnerService.start();
+    this.wordService.getWordTypes().subscribe({
+      next: (res: any) => {
+        console.log(res);
+        this.wordService.storageWordType(res.data);
+      },
+      complete: () => {
+        this.wordFormGroup.push(this.wordService.addWordForm());
+        this.overlayService.disposeOverlay();
+        this.spinnerService.stop();
+      }
+    });
   }
 
   //* 5 boxes at maximum
   public addCreateBox(): void{
-    this.wordFormGroup.push(this.wordService.addWordForm());
+    if(this.wordFormGroup.length < 5){
+      this.wordFormGroup.push(this.wordService.addWordForm());
+    }
   }
 
   public async setToCreateWord(){
@@ -42,23 +59,34 @@ export class IndexComponent implements OnInit{
     this.wordFormGroup.forEach(wordBox => {
       this.wordSetToCreate.push(wordBox.value);
     });
+    this.registerWordSets();
+  }
+
+  public registerWordSets(){
     this.overlayService.createOverlay();
+    this.spinnerService.start();
     console.log(this.wordSetToCreate);
     this.wordService.createWordList(this.wordSetToCreate).subscribe({
-      next: (res: Response) => {
-
+      next: async (res: Response | any) => {
+        const dialogRef = this.dialogService.openYesOrNoDialog(res.message, false);
+        await lastValueFrom(dialogRef.afterClosed());
+        this._resetWordList();
       },
       complete: () => { 
         this.overlayService.disposeOverlay();
+        this.spinnerService.stop();
       }
     });
   }
 
-  public async resetWordList(): Promise<void>{
+  public async confirmResetWordList(): Promise<void>{
     const dialogRef = this.dialogService.openYesOrNoDialog(AppMessages.WORD_RESET_BOX, true);
     let dialogResult = await lastValueFrom(dialogRef.afterClosed());
     if(!dialogResult) return;
+    this._resetWordList();
+  }
 
+  private _resetWordList(){
     this.wordFormGroup = [];
     this.wordFormGroup.push(this.wordService.addWordForm());
   }

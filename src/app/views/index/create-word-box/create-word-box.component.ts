@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { WordSetService } from 'src/app/services/word-set/word-set.service';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-create-word-box',
@@ -10,6 +10,6 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class CreateWordBoxComponent{
   @Input() wordSet!: FormGroup;
 
-  constructor(){}
+  constructor(public wordService: WordSetService){}
 }
 
