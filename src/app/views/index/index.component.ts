@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
 import { AppMessages } from 'src/app/constants/app-messages';
 import { WordSet } from 'src/app/models/word-set';
+import { ChatgptService } from 'src/app/services/chatgpt/chatgpt.service';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
 import { OverlayService } from 'src/app/services/overlay/overlay.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
@@ -21,7 +22,7 @@ export class IndexComponent implements OnInit{
     public wordService: WordSetService,
     private dialogService: DialogService,
     public spinnerService: SpinnerService,
-    private overlayService: OverlayService,
+    private overlayService: OverlayService
   ){}
 
   ngOnInit(): void {

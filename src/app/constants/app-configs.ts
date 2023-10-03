@@ -15,4 +15,7 @@ export class AppConfigs{
     //* AWS S3
     static readonly S3_WORD_PICKER_BUCKET_NAME: string = "wordpicker-storage";
     static readonly S3_USER_ICON_KEY: string = "user-icon";
+
+    //* ChatGpt constant message
+    static CHATGPT_DIRECT_JSON_FORMAT: string = "and please return only an answer that is in json format.";
 }

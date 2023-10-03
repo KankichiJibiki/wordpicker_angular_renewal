@@ -1,36 +1,29 @@
-import { environment } from './../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import Configuration from "openai";
-import OpenAIApi from "openai";
-
+import { ApiUrls } from 'src/app/constants/api-urls';
+import { AppConfigs } from 'src/app/constants/app-configs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatgptService {
-  private openai!: OpenAIApi;
 
-  constructor() {
-    const configuration = new Configuration({
-      apiKey: environment.openAiApiKey
+  constructor(private http: HttpClient) {}
+
+  public getMeaning(word: string){
+    let question = `What is meaning of ${word}? `;
+    this.getAnswers(question + AppConfigs.CHATGPT_DIRECT_JSON_FORMAT).subscribe({
+      next: (res: any) => {
+        console.log(res);
+        return res;
+      }
     });
-    this.openai = new OpenAIApi(configuration);
   }
 
-  public async chat(message: string): Promise<string> {
-    try {
-      // Use chatgpt.query method with optional parameters
-      const response = await this.chatgpt.query(message, {
-        temperature: 0.8,
-        max_tokens: 32,
-      });
-
-      // Return the response text
-      return response.text;
-    } catch (error) {
-      // Handle any errors
-      console.error(error);
-      return 'Something went wrong.';
-    }
+  public getAnswers(question: string) {
+    console.log(question);
+    let apiUrl = `${environment.apiUrl}/${ApiUrls.OPENAI_URL}/${ApiUrls.OPENAI_ACTION_URL_GET_ANSWERS}`;
+    return this.http.post<Response>(apiUrl, question);
   }
 }
