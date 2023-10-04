@@ -27,7 +27,13 @@ export class SigninComponent {
     private overlayService: OverlayService,
     private dialogService: DialogService,
   ){
+    this.checkIfAuthenticated();
     this.authForm = this.signinV.loginForm;
+  }
+
+  public checkIfAuthenticated(){
+    this.aService.isAuthenticated()
+    .then((data: boolean | Promise<any>) => { this.router.navigate(['/dashboard']) })
   }
 
   public signin(){
