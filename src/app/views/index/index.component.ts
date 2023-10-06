@@ -3,7 +3,6 @@ import { FormGroup } from '@angular/forms';
 import { lastValueFrom } from 'rxjs';
 import { AppMessages } from 'src/app/constants/app-messages';
 import { WordSet } from 'src/app/models/word-set';
-import { ChatgptService } from 'src/app/services/chatgpt/chatgpt.service';
 import { DialogService } from 'src/app/services/dialog/dialog.service';
 import { OverlayService } from 'src/app/services/overlay/overlay.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
@@ -17,6 +16,7 @@ import { WordSetService } from 'src/app/services/word-set/word-set.service';
 export class IndexComponent implements OnInit{
   wordFormGroup: FormGroup[] = [];
   wordSetToCreate: WordSet[] = [];
+  isWordFormGroupValid: boolean = false;
 
   constructor(
     public wordService: WordSetService,
@@ -38,17 +38,22 @@ export class IndexComponent implements OnInit{
         this.wordService.storageWordType(res.data);
       },
       complete: () => {
-        this.wordFormGroup.push(this.wordService.addWordForm());
+        this.wordFormGroup[0] = this.wordService.addWordForm();
         this.overlayService.disposeOverlay();
         this.spinnerService.stop();
       }
     });
   }
 
+  //* form validity from child to parent one
+  public onValidityChanged(validity: boolean){
+    this.isWordFormGroupValid = validity;
+  }
+
   //* 5 boxes at maximum
   public addCreateBox(): void{
     if(this.wordFormGroup.length < 5){
-      this.wordFormGroup.push(this.wordService.addWordForm());
+      this.wordFormGroup[this.wordFormGroup.length+1] = this.wordService.addWordForm();
     }
   }
 
@@ -78,13 +83,6 @@ export class IndexComponent implements OnInit{
         this.spinnerService.stop();
       }
     });
-  }
-
-  public async confirmResetWordList(): Promise<void>{
-    const dialogRef = this.dialogService.openYesOrNoDialog(AppMessages.WORD_RESET_BOX, true);
-    let dialogResult = await lastValueFrom(dialogRef.afterClosed());
-    if(!dialogResult) return;
-    this._resetWordList();
   }
 
   private _resetWordList(){

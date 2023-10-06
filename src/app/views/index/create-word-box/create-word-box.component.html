@@ -1,5 +1,9 @@
 
 <mat-card class="word-create-container">
+    <div class="option-button-group">
+        <button mat-icon-button (click)="confirmResetWordList()"><mat-icon>refresh</mat-icon></button>
+        <button mat-icon-button color="accent" (click)="confirmResetWordList()"><mat-icon>delete</mat-icon></button>
+    </div>
     <mat-card-header class="word-create-header">
         <mat-card-title>
             Word: {{ wordSet.value.word }}
