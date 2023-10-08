@@ -2,12 +2,17 @@
     <div class="page-title-wrapper">
         <div class="page-title">Register Words</div>
         <div class="dictionary-link">
-            <a routerLink=""><mat-icon>library_books</mat-icon>To Dictionary</a>
+            <a routerLink="/dictionary"><mat-icon>library_books</mat-icon>To Dictionary</a>
         </div>
     </div>
     <div class="add-create-card-container">
-        <ng-container *ngFor="let wordBox of wordFormGroup">
-            <app-create-word-box [wordSet]="wordBox" (validityChanged)="onValidityChanged($event)"></app-create-word-box>
+        <ng-container *ngFor="let wordBox of wordFormGroup; let i = index">
+            <app-create-word-box 
+            [wordSet]="wordBox" 
+            [indexCount]="i" 
+            (validityChanged)="onValidityChanged($event)"
+            (removeIndex)="removeItem($event)"
+            ></app-create-word-box>
         </ng-container>
         <button mat-icon-button class="add-card-button" color="accent" (click)="addCreateBox()">
             <mat-icon>library_add</mat-icon>

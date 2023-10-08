@@ -23,12 +23,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IndexModule } from './views/index/index.module';
 import { DashboardModule } from './views/dashboard/dashboard.module';
 import { ErrorInterceptor } from './services/error/error.interceptor';
+import { DictionaryComponent } from './views/dictionary/dictionary.component';
+import { DictionaryModule } from './views/dictionary/dictionary.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProgressSpinnerComponent,
-    NavigationComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ import { ErrorInterceptor } from './services/error/error.interceptor';
     MatTabsModule,
     MatDividerModule,
     MatListModule,
+    DictionaryModule
   ],
   providers: [
     {

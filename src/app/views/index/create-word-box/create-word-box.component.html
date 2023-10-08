@@ -1,12 +1,12 @@
 
-<mat-card class="word-create-container">
+<mat-card class="word-create-container" id="{{ indexCount }}">
     <div class="option-button-group">
-        <button mat-icon-button (click)="confirmResetWordList()"><mat-icon>refresh</mat-icon></button>
-        <button mat-icon-button color="accent" (click)="confirmResetWordList()"><mat-icon>delete</mat-icon></button>
+        <button mat-icon-button (click)="resetWordList()"><mat-icon>refresh</mat-icon></button>
+        <button mat-icon-button color="accent" (click)="removeWordBox()"><mat-icon>delete</mat-icon></button>
     </div>
     <mat-card-header class="word-create-header">
         <mat-card-title>
-            Word: {{ wordSet.value.word }}
+            No.{{ indexCount+1 }}: {{ wordSet.value.word }}
         </mat-card-title>
     </mat-card-header>
     <mat-card-content class="word-create-main">

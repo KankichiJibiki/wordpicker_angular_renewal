@@ -5,12 +5,14 @@ import { IndexComponent } from './views/index/index.component';
 import { AuthGuard } from './guard/authGuard';
 import { SigninComponent } from './views/auth/signin/signin.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { DictionaryComponent } from './views/dictionary/dictionary.component';
 
 const routes: Routes = [
   {path:'', component: SigninComponent},
   {path:'signup', component: SignupComponent},
   {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path:'index', component: IndexComponent, canActivate: [AuthGuard]},
+  {path:'dictionary', component: DictionaryComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

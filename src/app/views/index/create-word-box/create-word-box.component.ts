@@ -2,9 +2,6 @@ import { WordSetService } from 'src/app/services/word-set/word-set.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ChatgptService } from 'src/app/services/chatgpt/chatgpt.service';
-import { lastValueFrom } from 'rxjs';
-import { AppMessages } from 'src/app/constants/app-messages';
-import { DialogService } from 'src/app/services/dialog/dialog.service';
 
 @Component({
   selector: 'app-create-word-box',
@@ -13,7 +10,9 @@ import { DialogService } from 'src/app/services/dialog/dialog.service';
 })
 export class CreateWordBoxComponent{
   @Input() wordSet!: FormGroup;
+  @Input() indexCount!: number;
   @Output() validityChanged = new EventEmitter<boolean>();
+  @Output() removeIndex = new EventEmitter<number>();
 
   constructor(
     public wordService: WordSetService,
@@ -26,12 +25,20 @@ export class CreateWordBoxComponent{
     })
   }
 
-  public confirmResetWordList(): void{
-    console.log(this.wordSet);
+  public removeWordBox(): void{
+    this.removeIndex.emit(this.indexCount);
+  }
+
+  public resetWordList(): void{
+    this.wordSet.value.word = "";
+    this.wordSet.value.meaning = "";
+    this.wordSet.value.useCase = "";
+    this.wordSet.value.synonymous = "";
+    this.wordSet.value.typeId = null;
+    this.wordSet.value.favorite_flg = 0;
   }
 
   public chatAboutMeaning(){
-    console.log(this.wordSet.value.word);
     let res = this.chatgptService.getMeaning(this.wordSet.value.word);
     console.log(res);
   }

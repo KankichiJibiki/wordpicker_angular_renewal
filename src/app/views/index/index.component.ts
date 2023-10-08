@@ -34,11 +34,10 @@ export class IndexComponent implements OnInit{
     this.spinnerService.start();
     this.wordService.getWordTypes().subscribe({
       next: (res: any) => {
-        console.log(res);
         this.wordService.storageWordType(res.data);
-      },
+      },    
       complete: () => {
-        this.wordFormGroup[0] = this.wordService.addWordForm();
+        this.wordFormGroup.push(this.wordService.addWordForm());
         this.overlayService.disposeOverlay();
         this.spinnerService.stop();
       }
@@ -53,7 +52,7 @@ export class IndexComponent implements OnInit{
   //* 5 boxes at maximum
   public addCreateBox(): void{
     if(this.wordFormGroup.length < 5){
-      this.wordFormGroup[this.wordFormGroup.length+1] = this.wordService.addWordForm();
+      this.wordFormGroup.push(this.wordService.addWordForm());
     }
   }
 
@@ -83,6 +82,12 @@ export class IndexComponent implements OnInit{
         this.spinnerService.stop();
       }
     });
+  }
+
+  public removeItem(index: number) {
+    if (this.wordFormGroup !== undefined && index > 0) {
+      this.wordFormGroup.splice(index, 1);
+    }
   }
 
   private _resetWordList(){
