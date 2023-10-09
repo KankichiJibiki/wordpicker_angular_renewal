@@ -1,1 +1,16 @@
-<p>dictionary works!</p>
+<main class="dictionary-container">
+    <div class="page-title">{{ username }}'s Dictionary</div>
+    <span>Hello, {{ username }}!</span>
+
+    <div class="dictionary-main">
+        <!-- Table -->
+        <div class="dictinary-search">
+            <app-search-dictionary></app-search-dictionary>
+        </div>
+        <div class="dictinary-status">
+            <!-- Status -->
+            <app-status-dictionary></app-status-dictionary>
+        </div>
+    </div>
+</main>
+

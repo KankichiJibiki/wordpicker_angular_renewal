@@ -1,0 +1,53 @@
+<main>
+    <form [formGroup]="wordSearchGroup" class="search-form">
+        <!-- 1.Word -->
+        <mat-form-field class="input-search">
+            <mat-label>Word</mat-label>
+            <input type="text" matInput name="word" [(ngModel)]="wordSearchGroup.value.word" formControlName="word" placeholder="Hello">
+            <mat-error *ngIf="wordSearchGroup.get('word')?.hasError('maxLength')">
+                Word length must be within 255
+            </mat-error>
+        </mat-form-field>
+        <!-- 2. Word Type-->
+        <mat-form-field class="input-search">
+            <mat-label>Word type</mat-label>
+            <mat-select [(ngModel)]="wordSearchGroup.value.typeId" placeholder="E.g) Verb" name="typeId" formControlName="typeId">
+                <ng-container *ngFor="let wordType of wordService.wordTypesList">
+                    <mat-option [value]="wordType.id">{{ wordType.type_jp }}</mat-option>
+                </ng-container>
+            </mat-select>
+            <mat-error *ngIf="wordSearchGroup.get('typeId')?.hasError('pattern')">
+                Word type invalid
+            </mat-error>
+        </mat-form-field>
+        <!-- 3.Meaning -->
+        <mat-form-field class="input-search">
+            <mat-label>Meaning</mat-label>
+            <input type="text" matInput name="meaning" [(ngModel)]="wordSearchGroup.value.meaning" formControlName="meaning" placeholder="Hello">
+            <mat-error *ngIf="wordSearchGroup.get('meaning')?.hasError('maxLength')">
+                Word type length must be within 255
+            </mat-error>
+        </mat-form-field>
+        <!-- 4. Favorite -->
+        <mat-checkbox [(ngModel)]="wordSearchGroup.value.favoriteFlg" value="1" class="favorite-checkbox" formControlName="favorite_flg">
+            Favorite
+        </mat-checkbox>
+    </form>
+    <div class="search-button">
+        <button mat-raised-button color="primary" class="input-button">Search</button>
+    </div>
+
+    <!-- Table -->
+    <table mat-table class="mat-elevation-z8">
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef> No. </th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+      
+        <ng-container matColumnDef="word">
+          <th mat-header-cell *matHeaderCellDef> Word </th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+    </table>
+</main>

@@ -1,0 +1,12 @@
+.dictionary-container{
+    width: 98%;
+    height: 100vh;
+    background-color: #ebeeee;
+    margin: 4.0rem 0 0;
+    padding: .7rem;
+}
+
+.dictionary-main{
+    display: flex;
+    margin: 4.5rem auto;
+}

@@ -30,18 +30,8 @@ export class IndexComponent implements OnInit{
   }
 
   private initializeWordBox(){
-    this.overlayService.createOverlay();
-    this.spinnerService.start();
-    this.wordService.getWordTypes().subscribe({
-      next: (res: any) => {
-        this.wordService.storageWordType(res.data);
-      },    
-      complete: () => {
-        this.wordFormGroup.push(this.wordService.addWordForm());
-        this.overlayService.disposeOverlay();
-        this.spinnerService.stop();
-      }
-    });
+    this.wordService.getWordTypes();
+    this.wordFormGroup.push(this.wordService.addWordForm());
   }
 
   //* form validity from child to parent one

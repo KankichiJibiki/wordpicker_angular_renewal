@@ -1,0 +1,13 @@
+.search-form{
+    flex-wrap: wrap;
+}
+
+.input-search, .favorite-checkbox{
+    width: 45%;
+    height: 72px;
+    margin: .4rem;
+}
+
+.search-button{
+    margin-left: auto;
+}

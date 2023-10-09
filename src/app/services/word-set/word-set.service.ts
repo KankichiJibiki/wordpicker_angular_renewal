@@ -7,6 +7,7 @@ import { WordSet } from 'src/app/models/word-set';
 import { CreateWordValidatoins } from 'src/app/validations/create-word-validatoin';
 import { FormGroup } from '@angular/forms';
 import { WordType } from 'src/app/models/word-type';
+import { WordSearch } from 'src/app/models/word-search';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,22 @@ export class WordSetService {
     return this.createWordValidations.createWordForm();
   }
 
-  public getWordTypes(): Observable<Response>{
+  public getWordTypes(){
+    this._getWordTypes().subscribe({
+      next: (res: any) => {
+        this.storageWordType(res.data);
+      }
+    });
+  }
+
+  private _getWordTypes(): Observable<Response>{
     let apiUrl = `${environment.apiUrl}/${ApiUrls.WORDLIST_URL}/${ApiUrls.WORDLIST_ACTION_URL_GET_WORD_TYPES}`;
     return this.http.get<Response>(apiUrl);
+  }
+
+  public getWordList(searchParams: WordSearch): Observable<Response>{
+    let apiUrl = `${environment.apiUrl}/${ApiUrls.WORDLIST_URL}/${ApiUrls.WORDLIST_ACTION_URL_GET_WORDS}`;
+    return this.http.post<Response>(apiUrl, searchParams);
   }
 
   public storageWordType(wordTypeList: WordType[]){
@@ -37,6 +51,8 @@ export class WordSetService {
     let apiUrl = `${environment.apiUrl}/${ApiUrls.WORDLIST_URL}/${ApiUrls.WORDLIST_ACTION_URL_CREATE}`;
     return this.http.post<Response>(apiUrl, wordSetList);
   }
+
+
 
   // public getWordsList(): Observable<Response> {
   //   let apiUrl = `${environment.apiUrl}/${ApiUrls.WORDLIST_URL}/${ApiUrls.WORD_ACTION_URL_GETALL}`;
