@@ -1,11 +1,10 @@
 import { environment } from '../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiUrls } from 'src/app/constants/api-urls';
 import { WordSet } from 'src/app/models/word-set';
 import { CreateWordValidatoins } from 'src/app/validations/create-word-validatoin';
-import { FormGroup } from '@angular/forms';
 import { WordType } from 'src/app/models/word-type';
 import { WordSearch } from 'src/app/models/word-search';
 
@@ -14,7 +13,8 @@ import { WordSearch } from 'src/app/models/word-search';
 })
 export class WordSetService {
   wordSetList: WordSet[] = [];
-  wordTypesList: WordType[] = [];
+  public wordTypesListSubject: BehaviorSubject<WordType[] | undefined> = new BehaviorSubject<WordType[] | undefined>(undefined);
+  public wordListSubject: BehaviorSubject<WordSet[] | undefined> = new BehaviorSubject<WordSet[] | undefined>(undefined);
 
   constructor(
     private http: HttpClient,
@@ -26,11 +26,13 @@ export class WordSetService {
   }
 
   public getWordTypes(){
-    this._getWordTypes().subscribe({
-      next: (res: any) => {
-        this.storageWordType(res.data);
-      }
-    });
+    if(this.wordTypesListSubject.value == undefined){
+      this._getWordTypes().subscribe({
+        next: (res: any) => {
+          this.storageWordType(res.data);
+        }
+      });
+    }
   }
 
   private _getWordTypes(): Observable<Response>{
@@ -38,13 +40,14 @@ export class WordSetService {
     return this.http.get<Response>(apiUrl);
   }
 
-  public getWordList(searchParams: WordSearch): Observable<Response>{
-    let apiUrl = `${environment.apiUrl}/${ApiUrls.WORDLIST_URL}/${ApiUrls.WORDLIST_ACTION_URL_GET_WORDS}`;
-    return this.http.post<Response>(apiUrl, searchParams);
+  public storageWordType(wordTypeList: WordType[]){
+    this.wordTypesListSubject.next(wordTypeList);
   }
 
-  public storageWordType(wordTypeList: WordType[]){
-    this.wordTypesList = wordTypeList;
+  public getWordList(searchParams: WordSearch): Observable<Response>{
+    console.log(searchParams)
+    let apiUrl = `${environment.apiUrl}/${ApiUrls.WORDLIST_URL}/${ApiUrls.WORDLIST_ACTION_URL_GET_WORDS}`;
+    return this.http.post<Response>(apiUrl, searchParams);
   }
 
   public createWordList(wordSetList: WordSet[]): Observable<Response>{

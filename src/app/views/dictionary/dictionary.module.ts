@@ -11,6 +11,7 @@ import { StatusDictionaryComponent } from './status-dictionary/status-dictionary
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -30,7 +31,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule
   ],
 })
 export class DictionaryModule { }

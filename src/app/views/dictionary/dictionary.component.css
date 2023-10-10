@@ -8,5 +8,13 @@
 
 .dictionary-main{
     display: flex;
+    justify-content: space-between;
     margin: 4.5rem auto;
+}
+
+.dictinary-search{
+    width: 75%;
+}
+.dictinary-status{
+    width: 20%;
 }

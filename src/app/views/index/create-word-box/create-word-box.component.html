@@ -60,7 +60,7 @@
                 <mat-form-field class="text-input-select">
                     <mat-label>Word type</mat-label>
                     <mat-select [(ngModel)]="wordSet.value.typeId" placeholder="E.g) Verb" name="typeId" formControlName="typeId">
-                        <ng-container *ngFor="let wordType of wordService.wordTypesList">
+                        <ng-container *ngFor="let wordType of wordService.wordTypesListSubject.value">
                             <mat-option [value]="wordType.id">{{ wordType.type_jp }}</mat-option>
                         </ng-container>
                     </mat-select>

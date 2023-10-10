@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { WordSearch } from 'src/app/models/word-search';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { WordSetService } from 'src/app/services/word-set/word-set.service';
 import { SearchWordValidations } from 'src/app/validations/search-word-validations';
 
@@ -10,17 +12,39 @@ import { SearchWordValidations } from 'src/app/validations/search-word-validatio
 })
 export class SearchDictionaryComponent {
   public wordSearchGroup!: FormGroup;
+  public displayedColumns: string[] = ['id', 'word', 'meaning', 'typeId'];
+  public element_data: TableElements[] = [];
 
   constructor(
     public wordService: WordSetService,
+    private authService: AuthService,
     private searchWordValidations: SearchWordValidations
   ){
     this.wordSearchGroup = searchWordValidations.getSearchWordInputs();
   }
 
   ngOnInit(): void {
-    this.wordService.getWordTypes();
+    this.initialize();
   }
 
+  private initialize(){
+    const wordParams = new WordSearch();
+    console.log(this.authService.usernameSubject.value);
+    wordParams.username = this.authService.usernameSubject.value;
+    this.wordService.getWordTypes();
+    this.wordService.getWordList(wordParams).subscribe({
+      next: (res: any) => {
+        this.wordService.wordListSubject.next(res.data);
+        console.log(this.wordService.wordListSubject.value);
+        this.element_data = res.data;
+      }
+    });
+  }
+}
 
+export interface TableElements {
+  id: number,
+  word: string,
+  meaning: string,
+  typeId: string
 }
