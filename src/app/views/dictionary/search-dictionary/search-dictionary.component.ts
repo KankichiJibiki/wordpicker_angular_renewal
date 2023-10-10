@@ -12,7 +12,7 @@ import { SearchWordValidations } from 'src/app/validations/search-word-validatio
 })
 export class SearchDictionaryComponent {
   public wordSearchGroup!: FormGroup;
-  public displayedColumns: string[] = ['id', 'word', 'meaning', 'typeId'];
+  public displayedColumns: string[] = ['id', 'word', 'meaning', 'type_jp'];
   public element_data: TableElements[] = [];
 
   constructor(
@@ -32,10 +32,17 @@ export class SearchDictionaryComponent {
     console.log(this.authService.usernameSubject.value);
     wordParams.username = this.authService.usernameSubject.value;
     this.wordService.getWordTypes();
+    this.getWordList(wordParams);
+  }
+
+  public searchWordList(){
+    
+  }
+
+  public getWordList(wordParams: WordSearch){
     this.wordService.getWordList(wordParams).subscribe({
       next: (res: any) => {
         this.wordService.wordListSubject.next(res.data);
-        console.log(this.wordService.wordListSubject.value);
         this.element_data = res.data;
       }
     });
@@ -46,5 +53,5 @@ export interface TableElements {
   id: number,
   word: string,
   meaning: string,
-  typeId: string
+  type_jp: string
 }

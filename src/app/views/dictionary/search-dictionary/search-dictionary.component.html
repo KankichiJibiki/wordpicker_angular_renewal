@@ -30,11 +30,11 @@
         </mat-form-field>
         <!-- 4. Favorite -->
         <mat-checkbox [(ngModel)]="wordSearchGroup.value.favoriteFlg" value="1" class="favorite-checkbox" formControlName="favorite_flg">
-            Favorite
+            Show Favorite List
         </mat-checkbox>
     </form>
     <div class="search-button">
-        <button mat-raised-button color="primary" class="input-button">Search</button>
+        <button mat-raised-button color="primary" class="input-button" (click)="searchWordList()">Search</button>
     </div>
 
     <!-- Table -->
@@ -54,9 +54,9 @@
           <td mat-cell *matCellDef="let element"> {{element.meaning}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="typeId">
+        <ng-container matColumnDef="type_jp">
           <th mat-header-cell *matHeaderCellDef> Word Type </th>
-          <td mat-cell *matCellDef="let element"> {{element.typeId}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.type_jp}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

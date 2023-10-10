@@ -3,11 +3,15 @@
 }
 
 .input-search, .favorite-checkbox{
-    width: 45%;
+    width: 48%;
     height: 72px;
-    margin: .4rem;
+    margin: 0 .4rem;
 }
 
 .search-button{
-    margin-left: auto;
+    
+}
+
+.mat-elevation-z8{
+    margin: 1rem 0;
 }
