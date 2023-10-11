@@ -1,0 +1,13 @@
+.status-container{
+    padding: .2rem;
+}
+
+.status-header{
+    width: 85%;
+    margin: 0 auto;
+    border-bottom: 1px solid #b9b6b6;
+}
+
+.status-sub-title{
+    margin-bottom: 1rem;
+}

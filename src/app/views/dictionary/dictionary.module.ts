@@ -12,6 +12,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -19,7 +22,7 @@ import { MatTableModule } from '@angular/material/table';
   declarations: [
     DictionaryComponent,
     SearchDictionaryComponent,
-    StatusDictionaryComponent
+    StatusDictionaryComponent,
   ],
   imports: [
     CommonModule,
@@ -32,7 +35,10 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatSelectModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatIconModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class DictionaryModule { }

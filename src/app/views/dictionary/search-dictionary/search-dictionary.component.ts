@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { WordSearch } from 'src/app/models/word-search';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { OverlayService } from 'src/app/services/overlay/overlay.service';
 import { WordSetService } from 'src/app/services/word-set/word-set.service';
 import { SearchWordValidations } from 'src/app/validations/search-word-validations';
 
@@ -14,11 +15,13 @@ export class SearchDictionaryComponent {
   public wordSearchGroup!: FormGroup;
   public displayedColumns: string[] = ['id', 'word', 'meaning', 'type_jp'];
   public element_data: TableElements[] = [];
+  public isFetching = false;
 
   constructor(
     public wordService: WordSetService,
     private authService: AuthService,
-    private searchWordValidations: SearchWordValidations
+    private searchWordValidations: SearchWordValidations,
+    private overlayService: OverlayService
   ){
     this.wordSearchGroup = searchWordValidations.getSearchWordInputs();
   }
@@ -31,6 +34,7 @@ export class SearchDictionaryComponent {
     const wordParams = new WordSearch();
     console.log(this.authService.usernameSubject.value);
     wordParams.username = this.authService.usernameSubject.value;
+    this.isFetching = true;
     this.wordService.getWordTypes();
     this.getWordList(wordParams);
   }
@@ -44,6 +48,9 @@ export class SearchDictionaryComponent {
       next: (res: any) => {
         this.wordService.wordListSubject.next(res.data);
         this.element_data = res.data;
+      },
+      complete: () => {
+        this.isFetching = false;
       }
     });
   }

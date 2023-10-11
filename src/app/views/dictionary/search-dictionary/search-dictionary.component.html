@@ -34,10 +34,15 @@
         </mat-checkbox>
     </form>
     <div class="search-button">
-        <button mat-raised-button color="primary" class="input-button" (click)="searchWordList()">Search</button>
+        <button mat-raised-button color="primary" class="input-button" (click)="searchWordList()">
+            <mat-icon>search</mat-icon>Search
+        </button>
     </div>
 
     <!-- Table -->
+    <ng-container *ngIf="isFetching">
+        <mat-progress-spinner mode="indeterminate" class="spot-spinner" [diameter]="50"></mat-progress-spinner>
+    </ng-container>
     <table mat-table [dataSource]="element_data" class="mat-elevation-z8">
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef> No. </th>

@@ -9,9 +9,18 @@
 }
 
 .search-button{
-    
+    text-align: right;
 }
 
 .mat-elevation-z8{
     margin: 1rem 0;
+    position: relative;
+}
+
+.spot-spinner{
+    position: absolute;
+    top: 60%; /* Adjust as needed to center the spinner vertically */
+    left: 32%; /* Adjust as needed to center the spinner horizontally */
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Ensure the spinner appears above the table */
 }

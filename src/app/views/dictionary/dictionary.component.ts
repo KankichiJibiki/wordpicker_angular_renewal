@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { OverlayService } from 'src/app/services/overlay/overlay.service';
 
 @Component({
   selector: 'app-dictionary',
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class DictionaryComponent {
   username: string = "";
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
   ){
     this.username = authService.usernameSubject.value;
   }

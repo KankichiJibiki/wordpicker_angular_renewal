@@ -45,7 +45,6 @@ export class WordSetService {
   }
 
   public getWordList(searchParams: WordSearch): Observable<Response>{
-    console.log(searchParams)
     let apiUrl = `${environment.apiUrl}/${ApiUrls.WORDLIST_URL}/${ApiUrls.WORDLIST_ACTION_URL_GET_WORDS}`;
     return this.http.post<Response>(apiUrl, searchParams);
   }
