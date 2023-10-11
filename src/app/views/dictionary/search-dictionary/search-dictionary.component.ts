@@ -13,7 +13,7 @@ import { SearchWordValidations } from 'src/app/validations/search-word-validatio
 })
 export class SearchDictionaryComponent {
   public wordSearchGroup!: FormGroup;
-  public displayedColumns: string[] = ['id', 'word', 'meaning', 'type_jp'];
+  public displayedColumns: string[] = ['id', 'word', 'meaning', 'type_jp', 'menu'];
   public element_data: TableElements[] = [];
   public isFetching = false;
 
@@ -30,17 +30,19 @@ export class SearchDictionaryComponent {
     this.initialize();
   }
 
-  private initialize(){
-    const wordParams = new WordSearch();
-    console.log(this.authService.usernameSubject.value);
-    wordParams.username = this.authService.usernameSubject.value;
+  public initialize(){
+    const searchParams: WordSearch = this.wordSearchGroup.value;
+    searchParams.username = this.authService.usernameSubject.value;
     this.isFetching = true;
     this.wordService.getWordTypes();
-    this.getWordList(wordParams);
+    this.getWordList(searchParams);
   }
 
   public searchWordList(){
-    
+    const searchParams: WordSearch = this.wordSearchGroup.value;
+    searchParams.username = this.authService.usernameSubject.value;
+    this.isFetching = true;
+    this.getWordList(searchParams);
   }
 
   public getWordList(wordParams: WordSearch){
