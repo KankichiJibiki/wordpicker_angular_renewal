@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { WordSearch } from 'src/app/models/word-search';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { OverlayService } from 'src/app/services/overlay/overlay.service';
@@ -14,8 +16,10 @@ import { SearchWordValidations } from 'src/app/validations/search-word-validatio
 export class SearchDictionaryComponent {
   public wordSearchGroup!: FormGroup;
   public displayedColumns: string[] = ['id', 'word', 'meaning', 'type_jp', 'menu'];
-  public element_data: TableElements[] = [];
+  public element_data: TableWordListsElement[] = [];
   public isFetching = false;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  wordListDataSource!: MatTableDataSource<TableWordListsElement>;
 
   constructor(
     public wordService: WordSetService,
@@ -50,6 +54,8 @@ export class SearchDictionaryComponent {
       next: (res: any) => {
         this.wordService.wordListSubject.next(res.data);
         this.element_data = res.data;
+        this.wordListDataSource = new MatTableDataSource<TableWordListsElement>(res.data);
+        this.wordListDataSource.paginator = this.paginator;
       },
       complete: () => {
         this.isFetching = false;
@@ -58,7 +64,7 @@ export class SearchDictionaryComponent {
   }
 }
 
-export interface TableElements {
+export interface TableWordListsElement {
   id: number,
   word: string,
   meaning: string,

@@ -19,7 +19,8 @@ export class ErrorService {
       this.spinnerService.stop();
       this.overlayService.disposeOverlay();
     }
-    const dialogRef = this.dialogService.openErrDialog(error.error.message);
+    let error_message = error.error.message ? error.error.message : error.message;
+    const dialogRef = this.dialogService.openErrDialog(error_message);
     await lastValueFrom(dialogRef.afterClosed());
   }
 }

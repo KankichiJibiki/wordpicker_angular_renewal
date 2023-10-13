@@ -16,6 +16,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -40,7 +41,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatIconModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatPaginatorModule
   ],
 })
 export class DictionaryModule { }
