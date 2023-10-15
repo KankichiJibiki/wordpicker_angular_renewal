@@ -4,7 +4,7 @@ export class WordSet{
     meaning = "";
     useCase = "";
     synonymous = "";
-    favoriteFlg = 0;
+    favoriteFlg = false;
     wordType = "";
     typeId?: number;
     username = "";

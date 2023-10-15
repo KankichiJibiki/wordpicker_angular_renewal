@@ -21,6 +21,8 @@ export class CreateWordBoxComponent{
 
   ngOnInit() {
     this.wordSet.valueChanges.subscribe(() => {
+      console.log(this.wordSet);
+      console.log(this.wordSet.valid);
       this.validityChanged.emit(this.wordSet.valid);
     })
   }

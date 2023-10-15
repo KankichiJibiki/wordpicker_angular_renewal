@@ -28,7 +28,7 @@ export class CreateWordValidatoins{
             synonymous: new FormControl(wordSet.synonymous, [
                 Validators.maxLength(255)
             ]),
-            favorite_flg: new FormControl(wordSet.favoriteFlg, [
+            favoriteFlg: new FormControl(wordSet.favoriteFlg, [
                 Validators.pattern('[01]')
             ]),
             typeId: new FormControl(wordSet.typeId, [

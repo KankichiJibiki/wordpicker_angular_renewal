@@ -2,8 +2,12 @@ import { Component, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { lastValueFrom } from 'rxjs';
+import { AppMessages } from 'src/app/constants/app-messages';
 import { WordSearch } from 'src/app/models/word-search';
+import { WordSet } from 'src/app/models/word-set';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { DialogService } from 'src/app/services/dialog/dialog.service';
 import { OverlayService } from 'src/app/services/overlay/overlay.service';
 import { WordSetService } from 'src/app/services/word-set/word-set.service';
 import { SearchWordValidations } from 'src/app/validations/search-word-validations';
@@ -16,7 +20,6 @@ import { SearchWordValidations } from 'src/app/validations/search-word-validatio
 export class SearchDictionaryComponent {
   public wordSearchGroup!: FormGroup;
   public displayedColumns: string[] = ['id', 'word', 'meaning', 'type_jp', 'menu'];
-  public element_data: TableWordListsElement[] = [];
   public isFetching = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   wordListDataSource!: MatTableDataSource<TableWordListsElement>;
@@ -25,7 +28,8 @@ export class SearchDictionaryComponent {
     public wordService: WordSetService,
     private authService: AuthService,
     private searchWordValidations: SearchWordValidations,
-    private overlayService: OverlayService
+    private overlayService: OverlayService,
+    private dialogService: DialogService
   ){
     this.wordSearchGroup = searchWordValidations.getSearchWordInputs();
   }
@@ -53,7 +57,6 @@ export class SearchDictionaryComponent {
     this.wordService.getWordList(wordParams).subscribe({
       next: (res: any) => {
         this.wordService.wordListSubject.next(res.data);
-        this.element_data = res.data;
         this.wordListDataSource = new MatTableDataSource<TableWordListsElement>(res.data);
         this.wordListDataSource.paginator = this.paginator;
       },
@@ -61,6 +64,33 @@ export class SearchDictionaryComponent {
         this.isFetching = false;
       }
     });
+  }
+
+  public refresh(){
+    this.resetWordSearch();
+    this.initialize();
+  }
+
+  public resetWordSearch(){
+    this.wordSearchGroup.value.word = "";
+    this.wordSearchGroup.value.meaning = "";
+    this.wordSearchGroup.value.typeId = null;
+    this.wordSearchGroup.value.favoriteFlg = false;
+  }
+
+  public async removeWordSet(wordList: WordSet){
+    const dialogRef = this.dialogService.openYesOrNoDialog(AppMessages.WORD_PROCEED_REMOVE, true);
+    let dialogResult = await lastValueFrom(dialogRef.afterClosed());
+    if(!dialogResult) return;
+
+    this.isFetching = true;
+    this.wordService.removeWordList(wordList).subscribe({
+      next: async (res: any) => {
+        const successDialogRef = this.dialogService.openYesOrNoDialog(AppMessages.WORD_REMOVE_SUCCESS, false);
+        await lastValueFrom(successDialogRef.afterClosed());
+        this.initialize();
+      }
+    })
   }
 }
 
