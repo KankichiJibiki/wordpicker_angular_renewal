@@ -14,7 +14,7 @@
             <!-- 1.Word -->
             <mat-form-field class="input-general">
                 <mat-label>Word</mat-label>
-                <input type="text" matInput name="word" [(ngModel)]="wordSet.value.word" formControlName="word" placeholder="Hello">
+                <input type="text" matInput name="word" formControlName="word" placeholder="Hello">
                 <mat-error *ngIf="wordSet.get('word')?.hasError('required')">
                     Word is required
                 </mat-error>
@@ -23,7 +23,7 @@
             <div class="d-flex jt-between">
                 <mat-form-field class="text-input-meaning">
                     <mat-label>Meaning</mat-label>
-                    <textarea name="meaning" matInput placeholder="こんにちわ" [(ngModel)]="wordSet.value.meaning" formControlName="meaning"></textarea>
+                    <textarea name="meaning" matInput placeholder="こんにちわ" formControlName="meaning"></textarea>
                     <mat-error *ngIf="wordSet.get('meaning')?.hasError('required')">
                         Word is required
                     </mat-error>
@@ -37,7 +37,7 @@
             <div class="d-flex jt-between">
                 <mat-form-field class="text-input-use-case">
                     <mat-label>Use-case</mat-label>
-                    <textarea name="useCase" matInput placeholder="Hello Mike." [(ngModel)]="wordSet.value.useCase" formControlName="useCase"></textarea>
+                    <textarea name="useCase" matInput placeholder="Hello Mike." formControlName="useCase"></textarea>
                 </mat-form-field>
                 <button mat-button class="auto-fill">
                     <mat-icon>search</mat-icon>
@@ -48,7 +48,7 @@
             <div class="d-flex jt-between">
                 <mat-form-field class="text-input-use-case">
                     <mat-label>Synonym</mat-label>
-                    <textarea name="synonymous" matInput placeholder="Hi, Hey" [(ngModel)]="wordSet.value.synonymous" formControlName="synonymous"></textarea>
+                    <textarea name="synonymous" matInput placeholder="Hi, Hey" formControlName="synonymous"></textarea>
                 </mat-form-field>
                 <button mat-button class="auto-fill">
                     <mat-icon>search</mat-icon>
@@ -59,7 +59,7 @@
             <div class="d-flex jt-between">
                 <mat-form-field class="text-input-select">
                     <mat-label>Word type</mat-label>
-                    <mat-select [(ngModel)]="wordSet.value.typeId" placeholder="E.g) Verb" name="typeId" formControlName="typeId">
+                    <mat-select placeholder="E.g) Verb" name="typeId" formControlName="typeId">
                         <ng-container *ngFor="let wordType of wordService.wordTypesListSubject.value">
                             <mat-option [value]="wordType.id">{{ wordType.type_jp }}</mat-option>
                         </ng-container>
@@ -68,7 +68,7 @@
                         Word type is required
                     </mat-error>
                 </mat-form-field>
-                <mat-checkbox [(ngModel)]="wordSet.value.favoriteFlg" value="1" class="favorite-checkbox" formControlName="favoriteFlg">
+                <mat-checkbox (change)="toggleFav($event)" class="favorite-checkbox" formControlName="favoriteFlg">
                     Add to Favorite list
                 </mat-checkbox>
             </div>

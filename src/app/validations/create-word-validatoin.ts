@@ -9,8 +9,7 @@ import { AuthService } from '../services/auth/auth.service';
 export class CreateWordValidatoins{
     constructor(private authService: AuthService){}
 
-    public createWordForm(){
-        const wordSet = new WordSet();
+    public createWordForm(wordSet: WordSet){
         wordSet.username = this.authService.usernameSubject.value;
         
         return new FormGroup({
@@ -29,7 +28,7 @@ export class CreateWordValidatoins{
                 Validators.maxLength(255)
             ]),
             favoriteFlg: new FormControl(wordSet.favoriteFlg, [
-                Validators.pattern('[01]')
+                // Validators.pattern('[true, false]')
             ]),
             typeId: new FormControl(wordSet.typeId, [
                 Validators.required,

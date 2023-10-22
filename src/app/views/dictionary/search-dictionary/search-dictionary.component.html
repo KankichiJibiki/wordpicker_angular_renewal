@@ -31,7 +31,7 @@
         </mat-form-field>
         <!-- 4. Favorite -->
         <mat-checkbox [(ngModel)]="wordSearchGroup.value.favoriteFlg" value="1" class="favorite-checkbox" formControlName="favorite_flg">
-            Show Favorite List
+            Show only Favorite List
         </mat-checkbox>
     </form>
     <div class="search-button">
@@ -78,7 +78,7 @@
             
             <!-- Menu area -->
             <mat-menu #menu="matMenu">
-                <button mat-menu-item>
+                <button mat-menu-item (click)="openEditWordSet(row)">
                   <mat-icon>edit</mat-icon>
                   <span>Edit</span>
                 </button>

@@ -2,7 +2,8 @@ import { DialogResult, YesOrNoDialogComponent } from './../../views/components/d
 import { ErrorDialogComponent } from './../../views/components/dialog/error-dialog/error-dialog.component';
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { WordSet } from 'src/app/models/word-set';
+import { FormGroup } from '@angular/forms';
+import { EditDictionaryComponent } from 'src/app/views/components/dialog/edit-dictionary/edit-dictionary.component';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,15 @@ export class DialogService {
   {
     return this.dialog.open(YesOrNoDialogComponent, {
       data: [msg, type],
+    });
+  }
+
+  public openEditWordSet(id: number|undefined, wordSet: FormGroup): MatDialogRef<EditDictionaryComponent, DialogResult>{
+    return this.dialog.open(EditDictionaryComponent, {
+      data: {
+        id: id,
+        wordSet: wordSet
+      }
     });
   }
 }

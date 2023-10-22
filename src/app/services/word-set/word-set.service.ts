@@ -23,7 +23,11 @@ export class WordSetService {
   ) {}
 
   public addWordForm(){
-    return this.createWordValidations.createWordForm();
+    return this.createWordValidations.createWordForm(new WordSet());
+  }
+
+  public insertWordFormToEdit(wordSet: WordSet){
+    return this.createWordValidations.createWordForm(wordSet);
   }
 
   public getWordTypes(){
@@ -57,6 +61,11 @@ export class WordSetService {
 
   public removeWordList(wordSet: WordSet): Observable<Response>{
     let apiUrl = `${environment.apiUrl}/${ApiUrls.WORDLIST_URL}/${ApiUrls.WORDLIST_ACTION_URL_REMOVE}`;
+    return this.http.put<Response>(apiUrl, wordSet);
+  }
+
+  public modifyWordList(wordSet: WordSet): Observable<Response>{
+    let apiUrl = `${environment.apiUrl}/${ApiUrls.WORDLIST_URL}/${ApiUrls.WORDLIST_ACTION_URL_MODIFY}`;
     return this.http.put<Response>(apiUrl, wordSet);
   }
 }

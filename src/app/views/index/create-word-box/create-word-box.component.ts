@@ -21,8 +21,6 @@ export class CreateWordBoxComponent{
 
   ngOnInit() {
     this.wordSet.valueChanges.subscribe(() => {
-      console.log(this.wordSet);
-      console.log(this.wordSet.valid);
       this.validityChanged.emit(this.wordSet.valid);
     })
   }
@@ -43,6 +41,11 @@ export class CreateWordBoxComponent{
   public chatAboutMeaning(){
     let res = this.chatgptService.getMeaning(this.wordSet.value.word);
     console.log(res);
+  }
+
+  public toggleFav(event: any){
+    console.log(event);
+    this.wordSet.value.favoriteFlg !== event;
   }
 }
 

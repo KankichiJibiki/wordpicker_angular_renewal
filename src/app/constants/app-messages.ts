@@ -9,6 +9,7 @@ export class AppMessages{
     static readonly WORD_PROCEED_CREATE: string = 'All set to proceed?'
     static readonly WORD_PROCEED_REMOVE: string = 'Are you sure to remove this word?'
     static readonly WORD_REMOVE_SUCCESS: string = 'Removed'
+    static readonly WORD_MODIFY_SUCCESS: string = 'Saved'
     
     // Error
     static readonly SIGNOUT_ERROR: string = 'Sign out error'

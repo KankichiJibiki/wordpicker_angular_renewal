@@ -1,0 +1,85 @@
+<main class="edit-container">
+    <form [formGroup]="data.wordSet">
+        <!-- 1.Word -->
+        <mat-form-field class="full-width">
+            <mat-label>Word</mat-label>
+            <input type="text" 
+            matInput name="word" 
+            formControlName="word" 
+            placeholder="Hello"
+            value="{{ data.wordSet.value.word }}"
+            >
+            <mat-error *ngIf="data.wordSet.get('word')?.hasError('required')">
+                Word is required
+            </mat-error>
+        </mat-form-field>
+        <!-- 2.Meaning -->
+        <div>
+            <mat-form-field class="full-width">
+                <mat-label>Meaning</mat-label>
+                <textarea name="meaning" 
+                matInput 
+                placeholder="こんにちわ" 
+                formControlName="meaning"
+                value="{{ data.wordSet.value.meaning }}"
+                ></textarea>
+                <mat-error *ngIf="data.wordSet.get('meaning')?.hasError('required')">
+                    Word is required
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <!-- 3.Use case -->
+        <div>
+            <mat-form-field class="full-width">
+                <mat-label>Use-case</mat-label>
+                <textarea 
+                name="useCase" 
+                matInput 
+                placeholder="Hello Mike." 
+                formControlName="useCase"
+                value="{{ data.wordSet.value.useCase }}"
+                ></textarea>
+            </mat-form-field>
+        </div>
+        <!-- 4.Synonymous -->
+        <div>
+            <mat-form-field class="full-width">
+                <mat-label>Synonym</mat-label>
+                <textarea 
+                name="synonymous" 
+                matInput 
+                placeholder="Hi, Hey" 
+                formControlName="synonymous"
+                value="{{ data.wordSet.value.synonymous}}"
+                ></textarea>
+            </mat-form-field>
+        </div>
+        <!-- 5.Word type and Favorite -->
+        <div>
+            <mat-form-field class="full-width">
+                <mat-label>Word type</mat-label>
+                <mat-select placeholder="E.g) Verb" name="typeId" formControlName="typeId">
+                    <ng-container 
+                    *ngFor="let wordType of wordService.wordTypesListSubject.value"
+                    >
+                        <mat-option [value]="wordType.id">{{ wordType.type_jp }}</mat-option>
+                    </ng-container>
+                </mat-select>
+                <mat-error *ngIf="data.wordSet.get('typeId')?.hasError('required')">
+                    Word type is required
+                </mat-error>
+            </mat-form-field>
+            <mat-checkbox 
+            (change)="toggleFav($event)" 
+            class="full-width" 
+            formControlName="favoriteFlg"
+            >
+                Add to Favorite list
+            </mat-checkbox>
+        </div>
+    </form>
+    <div class="edit-actions-container">
+        <button mat-raised-button (click)="closeDialog()">Close</button>
+        <button mat-raised-button color="primary" (click)="modifyWordSet()">Save</button>
+    </div>
+</main>

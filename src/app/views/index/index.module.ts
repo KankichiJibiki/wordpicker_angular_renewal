@@ -34,7 +34,7 @@ import { CreateWordBoxComponent } from './create-word-box/create-word-box.compon
     MatCardModule,
     MatButtonModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ]
 })
 export class IndexModule { }

@@ -92,6 +92,15 @@ export class SearchDictionaryComponent {
       }
     })
   }
+
+  public async openEditWordSet(wordSet: WordSet){
+    //* open edit dialog
+    let wordSetForm = this.wordService.insertWordFormToEdit(wordSet);
+    console.log(wordSetForm);
+    const dialogRef = this.dialogService.openEditWordSet(wordSet.id, wordSetForm);
+    await lastValueFrom(dialogRef.afterClosed());
+    this.refresh();
+  }
 }
 
 export interface TableWordListsElement {
