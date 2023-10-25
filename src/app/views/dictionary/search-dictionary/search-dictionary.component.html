@@ -86,14 +86,13 @@
                   <mat-icon>remove_circle</mat-icon>
                   <span>Remove</span>
                 </button>
-                <button mat-menu-item>
+                <button mat-menu-item (click)="toggleDetailsSidenav(row)">
                   <mat-icon>navigate_next</mat-icon>
                   <span>Details</span>
                 </button>
             </mat-menu>
           </td>
         </ng-container>
-
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -23,6 +23,7 @@ export class SearchDictionaryComponent {
   public isFetching = false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   wordListDataSource!: MatTableDataSource<TableWordListsElement>;
+  @Output() openDetailsNavEvent = new EventEmitter<WordSet>();
 
   constructor(
     public wordService: WordSetService,
@@ -96,10 +97,13 @@ export class SearchDictionaryComponent {
   public async openEditWordSet(wordSet: WordSet){
     //* open edit dialog
     let wordSetForm = this.wordService.insertWordFormToEdit(wordSet);
-    console.log(wordSetForm);
     const dialogRef = this.dialogService.openEditWordSet(wordSet.id, wordSetForm);
     await lastValueFrom(dialogRef.afterClosed());
     this.refresh();
+  }
+
+  public toggleDetailsSidenav(wordSet: WordSet): void{
+    this.openDetailsNavEvent.emit(wordSet);
   }
 }
 

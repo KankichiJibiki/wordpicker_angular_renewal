@@ -1,16 +1,33 @@
-<main class="dictionary-container">
-    <div class="page-title">{{ username }}'s Dictionary</div>
-    <span>Hello, {{ username }}!</span>
+<mat-sidenav-container>
+    <!-- Side Body -->
+    <mat-sidenav mode="over" align="start" #detailSidenav class="detail-word-container">
+        <h1 class="word-detail-title">{{ wordSet?.word }} in details</h1>
+        <div class="word-item">Meaning > {{ wordSet?.meaning }}</div>
+        <div class="word-item">Use-Case > {{ wordSet?.useCase }}</div>
+        <div class="word-item">Synonymous > {{ wordSet?.synonymous }}</div>
+        <div class="word-item">Word type > {{ wordSet?.type_jp }}</div>
+        <div class="word-item">Creation date > {{ wordSet?.created_date | date: 'Y-MM-dd H:m:s'}}</div>
+        <div class="word-item">Update date > {{ wordSet?.updated_date | date: 'Y-MM-dd H:m:s'}}</div>
+    </mat-sidenav>
+    <!-- Main Body -->
+    <mat-sidenav-content>
+        <main class="dictionary-container">
+            <div class="page-title">{{ username }}'s Dictionary</div>
+            <span>Hello, {{ username }}!</span>
+        
+            <div class="dictionary-main">
+                <!-- Table -->
+                <div class="dictinary-search">
+                    <app-search-dictionary (openDetailsNavEvent)="openDetailSidenav($event)"></app-search-dictionary>
+                </div>
+                <div class="dictinary-status">
+                    <!-- Status -->
+                    <app-status-dictionary></app-status-dictionary>
+                </div>
+            </div>
+        </main>
+    </mat-sidenav-content>
+</mat-sidenav-container>
 
-    <div class="dictionary-main">
-        <!-- Table -->
-        <div class="dictinary-search">
-            <app-search-dictionary></app-search-dictionary>
-        </div>
-        <div class="dictinary-status">
-            <!-- Status -->
-            <app-status-dictionary></app-status-dictionary>
-        </div>
-    </div>
-</main>
+
 
