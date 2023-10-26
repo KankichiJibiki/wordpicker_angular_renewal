@@ -1,11 +1,11 @@
-<mat-sidenav-container>
+<mat-sidenav-container class="main-dictionary-content">
     <!-- Side Body -->
     <mat-sidenav mode="over" align="start" #detailSidenav class="detail-word-container">
-        <h1 class="word-detail-title">{{ wordSet?.word }} in details</h1>
+        <h1 class="word-detail-title">{{ wordSet?.word }} <span>in details</span></h1>
         <div class="word-item">Meaning > {{ wordSet?.meaning }}</div>
         <div class="word-item">Use-Case > {{ wordSet?.useCase }}</div>
         <div class="word-item">Synonymous > {{ wordSet?.synonymous }}</div>
-        <div class="word-item">Word type > {{ wordSet?.type_jp }}</div>
+        <div class="word-item">Word type > {{ wordSet?.typeId }}</div>
         <div class="word-item">Creation date > {{ wordSet?.created_date | date: 'Y-MM-dd H:m:s'}}</div>
         <div class="word-item">Update date > {{ wordSet?.updated_date | date: 'Y-MM-dd H:m:s'}}</div>
     </mat-sidenav>
