@@ -28,7 +28,7 @@ export class SearchDictionaryComponent {
   constructor(
     public wordService: WordSetService,
     private authService: AuthService,
-    private searchWordValidations: SearchWordValidations,
+    searchWordValidations: SearchWordValidations,
     private overlayService: OverlayService,
     private dialogService: DialogService
   ){
@@ -89,6 +89,8 @@ export class SearchDictionaryComponent {
       next: async (res: any) => {
         const successDialogRef = this.dialogService.openYesOrNoDialog(AppMessages.WORD_REMOVE_SUCCESS, false);
         await lastValueFrom(successDialogRef.afterClosed());
+
+        this.wordService.emitWordSetModified();
         this.initialize();
       }
     })

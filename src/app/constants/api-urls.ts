@@ -5,6 +5,7 @@ export class ApiUrls{
         static readonly WORDLIST_ACTION_URL_CREATE: string = "CreateWordList";
         static readonly WORDLIST_ACTION_URL_REMOVE: string = "RemoveWordsList";
         static readonly WORDLIST_ACTION_URL_MODIFY: string = "ModifyWordList";
+        static readonly WORDLIST_ACTION_URL_COUNT_WORD_BY_TYPE: string = "GetWordCountByWordType";
         
     static readonly S3_URL: string = "S3";
         static readonly S3_ACTION_URL_REGISTER: string = "UploadImage";

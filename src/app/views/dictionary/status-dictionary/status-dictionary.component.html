@@ -5,12 +5,21 @@
         <mat-card-subtitle class="status-sub-title">Signed up since June 24 2018 </mat-card-subtitle>
     </mat-card-header>
     <mat-card-content class="status-content">
-        <div class="status">
-
-        </div>
-        <div class="status-details">
-            
-            <!-- Noun, Verb...etc -->
+        <ng-container *ngIf="isFetching">
+            <mat-progress-spinner mode="indeterminate" class="spot-spinner" [diameter]="50"></mat-progress-spinner>
+        </ng-container>
+        <div class="d-flex jt-between">
+            <div class="status">
+                <!-- charts -->
+                <app-pie-chart [wordCountList]="wordCountList.value"></app-pie-chart>
+            </div>
+            <div class="status-details">
+                <h3>Dictionary Analysis</h3>
+                <!-- Noun, Verb...etc -->
+                <mat-list *ngFor="let wordCount of wordCountList?.value | keyvalue">
+                    <mat-list-item>{{ wordCount.key }}: {{ wordCount.value }}</mat-list-item>
+                </mat-list>
+            </div>
         </div>
     </mat-card-content>
 </mat-card>

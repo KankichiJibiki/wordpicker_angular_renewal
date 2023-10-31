@@ -47,6 +47,7 @@ export class EditDictionaryComponent {
         await lastValueFrom(successDialogRef.afterClosed());
       },
       complete: () => {
+        this.wordService.emitWordSetModified();
         this.overlayService.disposeOverlay();
         this.spinnerService.stop();
         this.closeDialog();

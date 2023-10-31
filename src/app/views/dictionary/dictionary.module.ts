@@ -18,6 +18,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { PieChartComponent } from '../components/charts-all/pie-chart/pie-chart.component';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -26,6 +29,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     DictionaryComponent,
     SearchDictionaryComponent,
     StatusDictionaryComponent,
+    PieChartComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +48,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatProgressSpinnerModule,
     MatMenuModule,
     MatPaginatorModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatListModule,
+    NgChartsModule
   ],
 })
 export class DictionaryModule { }

@@ -52,7 +52,7 @@ import { DictionaryModule } from './views/dictionary/dictionary.module';
     MatTabsModule,
     MatDividerModule,
     MatListModule,
-    DictionaryModule
+    DictionaryModule,
   ],
   providers: [
     {
