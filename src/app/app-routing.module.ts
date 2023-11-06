@@ -6,6 +6,7 @@ import { AuthGuard } from './guard/authGuard';
 import { SigninComponent } from './views/auth/signin/signin.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { DictionaryComponent } from './views/dictionary/dictionary.component';
+import { PronounceComponent } from './views/pronounce/pronounce.component';
 
 const routes: Routes = [
   {path:'', component: SigninComponent},
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path:'index', component: IndexComponent, canActivate: [AuthGuard]},
   {path:'dictionary', component: DictionaryComponent, canActivate: [AuthGuard]},
+  {path:'pronounce', component: PronounceComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

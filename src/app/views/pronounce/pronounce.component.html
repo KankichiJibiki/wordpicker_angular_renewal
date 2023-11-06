@@ -1,0 +1,21 @@
+<main class="pronounce-container">
+    <mat-form-field class="text-input-speech">
+        <mat-label>Text to play</mat-label>
+        <textarea 
+            matInput
+            name="textToSpeech"
+            required
+            #textToSpeech="ngModel"
+            [(ngModel)]="textData.text"
+        ></textarea>
+    </mat-form-field>
+    <div *ngIf="textToSpeech.invalid && (textToSpeech.dirty || textToSpeech.touched)">
+        <div *ngIf="textToSpeech.errors?.['required']" class="alert">
+            Text is required
+        </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="getSpeechFile()">Generate</button>
+    <audio controls (ended)="onAudioEnded()">
+        <source [src]="audioUrl" type="audio/mpeg">
+    </audio>
+</main>

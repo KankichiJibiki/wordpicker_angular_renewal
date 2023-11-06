@@ -29,8 +29,8 @@ export class Features{
     {
       title: "発音トレーニング",
       icon: "arrow_back",
-      paragraph: "英語辞書にワードセットを登録して自分だけの'辞書'を作ろう！ 覚えられない単語を登録してWord pickerで出現させることができるよ。",
-      route: "",
+      paragraph: "練習したい単語や文章を入力して、再生されるレコードを真似してみよう。声に出すことによって定着率があがるよ！",
+      route: "/pronounce",
     },
     {
       title: "History",
