@@ -11,18 +11,35 @@ import { TextToSpeechService } from 'src/app/services/textToSpeech/text-to-speec
 export class PronounceComponent {
   public textData: TextData = {} as TextData;
   public audioUrl: string = "";
+  audio: HTMLAudioElement;
 
   constructor(
     private textToSpeechService: TextToSpeechService,
     private dialogService: DialogService,
-  ){}
+  ){
+    this.audio = new Audio();
+  }
+
+  ngOnChanges(): void{
+    console.log(this.audioUrl);
+  }
 
   public getSpeechFile(){
     this.textToSpeechService.getSpeechFile(this.textData).subscribe({
       next: (res: any) => {
-        this.audioUrl = res.fileContents;
+        const binaryAudio = atob(res.data.fileContents);
+        const blob = new Blob([new Uint8Array(binaryAudio.length).map((_, i) => binaryAudio.charCodeAt(i))], { type: 'audio/mpeg' });
+        const audioUrl = URL.createObjectURL(blob);
+        this.audioUrl = audioUrl;
+        console.log(this.audioUrl);
       }
     })
+  }
+
+  public play(){
+    this.audio.src = this.audioUrl;
+    this.audio.load();
+    this.audio.play();
   }
 
   public async onAudioEnded(){

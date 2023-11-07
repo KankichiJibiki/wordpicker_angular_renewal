@@ -23,7 +23,6 @@ export class PieChartComponent {
   }
 
   ngOnChanges(): void {
-    console.log(this.wordCountList);
     if (this.wordCountList) {
       this.pieChartLabels = Object.keys(this.wordCountList);
       this.chartData = Object.values(this.wordCountList);

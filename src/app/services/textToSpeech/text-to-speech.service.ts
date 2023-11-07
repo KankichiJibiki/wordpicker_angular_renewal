@@ -14,6 +14,6 @@ export class TextToSpeechService {
 
   public getSpeechFile(textData: TextData): Observable<Response>{
     let apiUrl = `${environment.apiUrl}/${ApiUrls.TEXT_TO_SPEECH_URL}/${ApiUrls.TEXT_TO_SPEECH_URL_GET_FILE}`;
-    return this.http.post<Response>(apiUrl, textData)
+    return this.http.post<Response>(apiUrl, textData);
   }
 }
