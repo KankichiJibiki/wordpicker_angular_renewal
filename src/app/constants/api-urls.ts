@@ -8,7 +8,8 @@ export class ApiUrls{
         static readonly WORDLIST_ACTION_URL_COUNT_WORD_BY_TYPE: string = "GetWordCountByWordType";
         
     static readonly S3_URL: string = "S3";
-        static readonly S3_ACTION_URL_REGISTER: string = "UploadImage";
+        static readonly S3_ACTION_URL_REGISTER_ICON: string = "UploadIconImage";
+        static readonly S3_ACTION_URL_GET_ICON: string = "GetIconImage";
 
     static readonly OPENAI_URL: string = "OpenAi";
         static readonly OPENAI_ACTION_URL_GET_ANSWERS: string = "GetAnswers";

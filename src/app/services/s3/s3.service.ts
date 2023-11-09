@@ -14,7 +14,7 @@ export class S3Service {
   ) { }
 
   public uploadIconToS3(formData: FormData): Observable<Response> {
-    let apiUrl = `${environment.apiUrl}/${ApiUrls.S3_URL}/${ApiUrls.S3_ACTION_URL_REGISTER}`;
+    let apiUrl = `${environment.apiUrl}/${ApiUrls.S3_URL}/${ApiUrls.S3_ACTION_URL_REGISTER_ICON}`;
 
     return this.http.post<Response>(apiUrl, formData);
   }
