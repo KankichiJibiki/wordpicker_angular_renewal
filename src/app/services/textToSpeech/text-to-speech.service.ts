@@ -13,7 +13,7 @@ export class TextToSpeechService {
   constructor(private http: HttpClient) { }
 
   public getSpeechFile(textData: TextData): Observable<Response>{
-    let apiUrl = `${environment.apiUrl}/${ApiUrls.TEXT_TO_SPEECH_URL}/${ApiUrls.TEXT_TO_SPEECH_URL_GET_FILE}`;
+    let apiUrl = `${environment.apiUrl}/${ApiUrls.TEXT_AND_SPEECH_URL}/${ApiUrls.TEXT_AND_SPEECH_URL_GET_AUDIO}`;
     return this.http.post<Response>(apiUrl, textData);
   }
 }

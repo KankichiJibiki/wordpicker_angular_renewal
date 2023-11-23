@@ -25,7 +25,7 @@ export class EditDictionaryComponent {
   ){}
 
   public closeDialog(): void{
-    this.dialogRef.close(DialogResult.Yes)
+    this.dialogRef.close(DialogResult.No)
   }
 
   public toggleFav(event: any){
@@ -42,7 +42,7 @@ export class EditDictionaryComponent {
     let wordSet = this.data.wordSet.value;
     wordSet.id = this.data.id;
     this.wordService.modifyWordList(this.data.wordSet.value).subscribe({
-      next: async (res: any) => {
+      next: async () => {
         const successDialogRef = this.dialogService.openYesOrNoDialog(AppMessages.WORD_MODIFY_SUCCESS, false);
         await lastValueFrom(successDialogRef.afterClosed());
       },

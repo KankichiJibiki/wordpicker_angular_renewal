@@ -16,8 +16,8 @@
             </mat-error>
         </div>
     </div>
-    <button mat-raised-button color="primary" (click)="getSpeechFile()">Generate</button>
-    <audio controls (ended)="onAudioEnded()">
-        <source [src]="audioUrl" type="audio/mpeg">
+    <button mat-raised-button color="primary" (click)="getSpeechFile()" [disabled]="textToSpeech.invalid">Generate</button>
+    <audio controls #audioPlayer>
+        <source [src]="audioUrlSubject.value" type="audio/mpeg">
     </audio>
 </main>

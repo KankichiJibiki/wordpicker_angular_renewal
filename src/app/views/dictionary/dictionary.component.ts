@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { WordSet } from 'src/app/models/word-set';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { OverlayService } from 'src/app/services/overlay/overlay.service';
 
 @Component({
   selector: 'app-dictionary',

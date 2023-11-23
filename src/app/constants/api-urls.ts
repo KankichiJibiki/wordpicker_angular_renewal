@@ -14,6 +14,6 @@ export class ApiUrls{
     static readonly OPENAI_URL: string = "OpenAi";
         static readonly OPENAI_ACTION_URL_GET_ANSWERS: string = "GetAnswers";
 
-    static readonly TEXT_TO_SPEECH_URL: string = "TextToSpeech";
-        static readonly TEXT_TO_SPEECH_URL_GET_FILE: string = "GetSpeechFile";
+    static readonly TEXT_AND_SPEECH_URL: string = "TextAndSpeech";
+        static readonly TEXT_AND_SPEECH_URL_GET_AUDIO: string = "GetSpeechFile";
 }
