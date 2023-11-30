@@ -1,0 +1,10 @@
+<div>
+    <button (click)="startRecording()" [disabled]="isRecording()">Start Recording</button>
+    <button (click)="stopRecordingAndGetRecord()" [disabled]="!isRecording()">Stop Recording</button>
+</div>
+
+<audio #audioPlayer controls>
+    <source [src]="recordedVoiceUrlSubject.value" type="audio/mpeg">
+</audio>
+
+<textarea name="" >{{ recognizedTextSubject.value }}</textarea>

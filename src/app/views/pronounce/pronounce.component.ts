@@ -1,7 +1,6 @@
 import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { DialogService } from 'src/app/services/dialog/dialog.service';
-import { TextToSpeechService } from 'src/app/services/textToSpeech/text-to-speech.service';
+import { TextAndSpeechService } from 'src/app/services/textAndSpeech/text-and-speech.service';
 
 @Component({
   selector: 'app-pronounce',
@@ -15,13 +14,13 @@ export class PronounceComponent {
   @ViewChild('audioPlayer') audioPlayer!: ElementRef;
 
   constructor(
-    private textToSpeechService: TextToSpeechService,
+    private textAndSpeechService: TextAndSpeechService,
   ){
     this.audio = new Audio();
   }
 
   public getSpeechFile(){
-    this.textToSpeechService.getSpeechFile(this.textData).subscribe({
+    this.textAndSpeechService.getSpeechFile(this.textData).subscribe({
       next: (res: any) => {
         this.audioUrlSubject.next(res.data);
         this.audioPlayer.nativeElement.load();
