@@ -1,5 +1,5 @@
 <main class="pronounce-container">
-    <div>
+    <div class="text-container">
         <mat-form-field class="text-input-speech">
             <mat-label>Text to play</mat-label>
             <textarea 
@@ -16,7 +16,7 @@
             </mat-error>
         </div>
     </div>
-    <div class="audio-player">
+    <div class="audio-player" class="audio-container">
         <button mat-raised-button color="primary" (click)="getSpeechFile()" [disabled]="textToSpeech.invalid">Generate</button>
         <audio controls #audioPlayer>
             <source [src]="audioUrlSubject.value" type="audio/mpeg">

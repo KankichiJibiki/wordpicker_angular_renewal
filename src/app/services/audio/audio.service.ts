@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { DialogService } from '../dialog/dialog.service';
 import { Observable, Subject, lastValueFrom } from 'rxjs';
+import * as moment from 'moment';
+import * as RecordRTC from 'recordrtc';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +13,10 @@ export class AudioService {
   private chunks: Blob[] = [];
 
   private readonly INITIAL_TIME = "00:00";
-  private stream = null;
-  private recorder = null;
-  private interval = null;
-  private startTime = null;
+  private stream: any;
+  private recorder: any;
+  private interval: any;
+  private startTime: any;
   private _recorded = new Subject<RecordedAudioOutput>();
   private _recordingTime = new Subject<string>();
   private _recordingFailed = new Subject<string>();
@@ -66,7 +68,48 @@ export class AudioService {
     }, 1000);
   }
 
+  public abortRecording() {
+    this.stopMedia();
+  }
 
+  private toString(value: any) {
+    let val = value;
+    if (!value) val = "00";
+    if (value < 10) val = "0" + value;
+    return val;
+  }
+
+  public stopRecording() {
+    if (this.recorder) {
+      this.recorder.stop(
+        (blob: any) => {
+          if (this.startTime) {
+            const mp3Name = encodeURIComponent(
+              "audio_" + new Date().getTime() + ".mp3"
+            );
+            this.stopMedia();
+            this._recorded.next({ blob: blob, title: mp3Name});
+          }
+        },
+        () => {
+          this.stopMedia();
+          this._recordingFailed.next("Failed");
+        }
+      );
+    }
+  }
+
+  private stopMedia() {
+    if(this.recorder) {
+      this.recorder = null;
+      clearInterval(this.interval);
+      this.startTime = null;
+      if (this.stream) {
+        this.stream.getAudioTracks().forEach((track: any) => track.stop());
+        this.stream = null;
+      }
+    }
+  }
 }
 
 interface RecordedAudioOutput {

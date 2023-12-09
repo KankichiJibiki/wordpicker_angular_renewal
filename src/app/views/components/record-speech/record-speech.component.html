@@ -1,10 +1,21 @@
-<div>
-    <button (click)="startRecording()" [disabled]="isRecording()">Start Recording</button>
-    <button (click)="stopRecordingAndGetRecord()" [disabled]="!isRecording()">Stop Recording</button>
-</div>
-
-<audio #audioPlayer controls>
-    <source [src]="recordedVoiceUrlSubject.value" type="audio/mpeg">
-</audio>
-
-<textarea name="" >{{ recognizedTextSubject.value }}</textarea>
+<main>
+    <div class="recording-container">
+        <div>
+            <button mat-raised-button color="primary" *ngIf="!isRecording && !blobUrl" (click)="startRecording()">Start Recording</button>
+            <button mat-raised-button color="accent" *ngIf="isRecording && !blobUrl" (click)="stopRecording()">Stop Recording</button>
+            <button mat-raised-button color="warn" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()">Clear Recording</button>
+        </div>
+        <br>
+        <div *ngIf="isRecording && !blobUrl">{{ recordedTime }}</div>
+        
+        <div>
+            <audio #audioPlayer controls *ngIf="!isRecording && blobUrl">
+                <source [src]="blobUrl" type="audio/webm">
+            </audio>
+        </div>
+    </div>
+    
+    <div class="recording-recognizer">
+        <textarea name="" >{{ recognizedTextSubject.value }}</textarea>
+    </div>
+</main>

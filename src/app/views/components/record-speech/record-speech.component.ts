@@ -36,6 +36,34 @@ export class RecordSpeechComponent {
     })
   }
 
+  public startRecording() {
+    if(!this.isRecording) {
+      this.isRecording = true;
+      this.audioService.startRecording();
+    }
+  }
+
+  public abortRecording() {
+    if(this.isRecording) {
+      this.isRecording = false;
+      this.audioService.abortRecording();
+    }
+  }
+
+  public stopRecording() {
+    if(this.isRecording) {
+      this.isRecording = false;
+      this.audioService.stopRecording();
+    }
+  }
+
+  public clearRecordedData() {
+    this.blobUrl = null;
+  }
+
+  ngOnDestroy(): void {
+    this.abortRecording();
+  }
 }
 
 export interface SpeechAudioData{
