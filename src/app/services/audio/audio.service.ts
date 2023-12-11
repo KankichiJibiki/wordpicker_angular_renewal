@@ -3,6 +3,9 @@ import { DialogService } from '../dialog/dialog.service';
 import { Observable, Subject, lastValueFrom } from 'rxjs';
 import * as moment from 'moment';
 import * as RecordRTC from 'recordrtc';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { ApiUrls } from 'src/app/constants/api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +24,10 @@ export class AudioService {
   private _recordingTime = new Subject<string>();
   private _recordingFailed = new Subject<string>();
 
-  constructor(private dialogService: DialogService) { }
+  constructor(
+    private dialogService: DialogService,
+    private http: HttpClient
+  ) { }
 
   public getRecordedBlob(): Observable<RecordedAudioOutput> {
     return this._recorded.asObservable();
@@ -55,7 +61,7 @@ export class AudioService {
   private record() {
     this.recorder = new RecordRTC.StereoAudioRecorder(this.stream, {
       type: "audio",
-      mimeType: "audio/webm"
+      mimeType: AudioService.AUDIO_TYPE
     });
 
     this.recorder.record();
@@ -85,7 +91,7 @@ export class AudioService {
         (blob: any) => {
           if (this.startTime) {
             const mp3Name = encodeURIComponent(
-              "audio_" + new Date().getTime() + ".mp3"
+              "audio_" + new Date().getTime() + ".wav"
             );
             this.stopMedia();
             this._recorded.next({ blob: blob, title: mp3Name});

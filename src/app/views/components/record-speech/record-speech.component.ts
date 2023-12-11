@@ -10,7 +10,6 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./record-speech.component.css']
 })
 export class RecordSpeechComponent {
-  private formRecordData!: Blob;
   private speechAudioData: SpeechAudioData = {} as SpeechAudioData;
   public recordedVoiceUrlSubject: BehaviorSubject<string> = new BehaviorSubject<string>("");
   public recognizedTextSubject: BehaviorSubject<string> = new BehaviorSubject<string>("");
@@ -18,7 +17,7 @@ export class RecordSpeechComponent {
   public isRecording = false;
   public recordedTime = "";
   public blobUrl: any;
-  public teste:any;
+  public teste: any;
 
   // Refer to this -> // https://stackblitz.com/edit/angular-audio-recorder?file=src%2Fapp%2Fapp.component.ts
   constructor(
@@ -33,6 +32,7 @@ export class RecordSpeechComponent {
       this.blobUrl = this.sanitizer.bypassSecurityTrustUrl(
         URL.createObjectURL(data.blob)
       )
+      const textBySpeech = this.sendAudioData();
     })
   }
 
@@ -59,6 +59,15 @@ export class RecordSpeechComponent {
 
   public clearRecordedData() {
     this.blobUrl = null;
+  }
+
+  private sendAudioData() {
+    console.log(this.teste);
+    this.textAndSpeechService.toTextByAudioFile(this.teste.blob).subscribe({
+      next: (res: any) => {
+        console.log(res);
+      }
+    });
   }
 
   ngOnDestroy(): void {

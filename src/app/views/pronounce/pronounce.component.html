@@ -1,26 +1,32 @@
 <main class="pronounce-container">
-    <div class="text-container">
-        <mat-form-field class="text-input-speech">
-            <mat-label>Text to play</mat-label>
-            <textarea 
-                matInput
-                name="textToSpeech"
-                required
-                #textToSpeech="ngModel"
-                [(ngModel)]="textData.text"
-            ></textarea>
-        </mat-form-field>
-        <div *ngIf="textToSpeech.invalid && (textToSpeech.dirty || textToSpeech.touched)">
-            <mat-error *ngIf="textToSpeech.errors?.['required']">
-                Text is required
-            </mat-error>
+    <div class="text-to-speech-container d-flex">
+        <div class="text-container">
+            <mat-form-field class="text-input-speech">
+                <mat-label>Text to play</mat-label>
+                <textarea 
+                    matInput
+                    name="textToSpeech"
+                    required
+                    #textToSpeech="ngModel"
+                    [(ngModel)]="textData.text"
+                ></textarea>
+            </mat-form-field>
+            <div *ngIf="textToSpeech.invalid && (textToSpeech.dirty || textToSpeech.touched)">
+                <mat-error *ngIf="textToSpeech.errors?.['required']">
+                    Text is required
+                </mat-error>
+            </div>
         </div>
-    </div>
-    <div class="audio-player" class="audio-container">
-        <button mat-raised-button color="primary" (click)="getSpeechFile()" [disabled]="textToSpeech.invalid">Generate</button>
-        <audio controls #audioPlayer>
-            <source [src]="audioUrlSubject.value" type="audio/mpeg">
-        </audio>
+        <div>
+            <div class="audio-player" class="audio-container">
+                <button mat-raised-button color="primary" (click)="getSpeechFile()" [disabled]="textToSpeech.invalid">Generate</button>
+            </div>
+            <div>
+                <audio controls #audioPlayer>
+                    <source [src]="audioUrlSubject.value" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
     </div>
     <app-record-speech></app-record-speech>
 </main>
