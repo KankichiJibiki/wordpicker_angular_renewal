@@ -18,6 +18,7 @@ export class RecordSpeechComponent {
   public recordedTime = "";
   public blobUrl: any;
   public teste: any;
+  public recgnizedText = "";
 
   // Refer to this -> // https://stackblitz.com/edit/angular-audio-recorder?file=src%2Fapp%2Fapp.component.ts
   constructor(
@@ -65,7 +66,8 @@ export class RecordSpeechComponent {
     console.log(this.teste);
     this.textAndSpeechService.toTextByAudioFile(this.teste.blob).subscribe({
       next: (res: any) => {
-        console.log(res);
+        this.recgnizedText = res.data.recgnizedText;
+        console.log(this.recgnizedText);
       }
     });
   }

@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
-import { DialogService } from '../dialog/dialog.service';
-import { Observable, Subject, lastValueFrom } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import * as moment from 'moment';
 import * as RecordRTC from 'recordrtc';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { ApiUrls } from 'src/app/constants/api-urls';
 
 @Injectable({
   providedIn: 'root'
@@ -24,10 +20,7 @@ export class AudioService {
   private _recordingTime = new Subject<string>();
   private _recordingFailed = new Subject<string>();
 
-  constructor(
-    private dialogService: DialogService,
-    private http: HttpClient
-  ) { }
+  constructor() { }
 
   public getRecordedBlob(): Observable<RecordedAudioOutput> {
     return this._recorded.asObservable();

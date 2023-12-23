@@ -1,21 +1,35 @@
-<main>
-    <div class="recording-container">
-        <div>
-            <button mat-raised-button color="primary" *ngIf="!isRecording && !blobUrl" (click)="startRecording()">Start Recording</button>
-            <button mat-raised-button color="accent" *ngIf="isRecording && !blobUrl" (click)="stopRecording()">Stop Recording</button>
-            <button mat-raised-button color="warn" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()">Clear Recording</button>
-        </div>
-        <br>
-        <div *ngIf="isRecording && !blobUrl">{{ recordedTime }}</div>
-        
-        <div>
-            <audio #audioPlayer controls *ngIf="!isRecording && blobUrl">
-                <source [src]="blobUrl" type="audio/webm">
-            </audio>
-        </div>
+<main class="recording-main-container">
+    <div class="title">
+        <h1>Speech To Text</h1>
+        <p>Recognize your speech to text</p>
     </div>
-    
-    <div class="recording-recognizer">
-        <textarea name="" >{{ recognizedTextSubject.value }}</textarea>
+    <div class="recording-container">
+        <div class="recording-area">
+            <div>
+                <button mat-raised-button color="primary" *ngIf="!isRecording && !blobUrl" (click)="startRecording()">Start Recording</button>
+                <button mat-raised-button color="accent" *ngIf="isRecording && !blobUrl" (click)="stopRecording()">Stop Recording</button>
+                <button mat-raised-button color="warn" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()">Clear Recording</button>
+            </div>
+            <br>
+            
+            <div>
+                <audio #audioPlayer controls>
+                    <source [src]="blobUrl" type="audio/webm">
+                </audio>
+            </div>
+        </div>
+        
+        <div class="recording-status">
+            <ul>
+                <li class="record-status-list">
+                    <div>Time</div>
+                    <div>{{ recordedTime }}</div>
+                </li>
+                <li class="record-status-list">
+                    <div>Result</div>
+                    <textarea disabled>{{ recgnizedText }}</textarea>
+                </li>
+            </ul>
+        </div>
     </div>
 </main>

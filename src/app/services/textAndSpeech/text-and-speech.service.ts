@@ -36,7 +36,6 @@ export class TextAndSpeechService {
     formData.append('audioFile', audioBlob, 'audio.wav');
     console.log(formData.get('audioFile'));
 
-
     let apiUrl = `${environment.apiUrl}/${ApiUrls.TEXT_AND_SPEECH_URL}/${ApiUrls.TEXT_AND_SPEECH_URL_GET_TEXT_BY_SPEECH}`;
     return this.http.post<Response>(apiUrl, formData);
   }

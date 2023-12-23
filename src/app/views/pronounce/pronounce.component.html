@@ -1,6 +1,10 @@
 <main class="pronounce-container">
-    <div class="text-to-speech-container d-flex">
-        <div class="text-container">
+    <div class="text-and-speech-container">
+        <div class="title">
+            <h1>Text To Speech</h1>
+            <p>Generage text to audio</p>
+        </div>
+        <div class="text-to-speech-container">
             <mat-form-field class="text-input-speech">
                 <mat-label>Text to play</mat-label>
                 <textarea 
@@ -16,17 +20,20 @@
                     Text is required
                 </mat-error>
             </div>
-        </div>
-        <div>
-            <div class="audio-player" class="audio-container">
-                <button mat-raised-button color="primary" (click)="getSpeechFile()" [disabled]="textToSpeech.invalid">Generate</button>
+            <div class="player-container">
+                <div class="audio-player">
+                    <button mat-raised-button color="primary" class="generate-audio-btn" (click)="getSpeechFile()" [disabled]="textToSpeech.invalid">Generate</button>
+                </div>
+                <div>
+                    <audio controls #audioPlayer>
+                        <source [src]="audioUrlSubject.value" type="audio/mpeg">
+                    </audio>
+                </div>
             </div>
-            <div>
-                <audio controls #audioPlayer>
-                    <source [src]="audioUrlSubject.value" type="audio/mpeg">
-                </audio>
-            </div>
         </div>
+        <app-record-speech></app-record-speech>
     </div>
-    <app-record-speech></app-record-speech>
+    <div class="side-container">
+        <h1>Side menu to pick up as materials</h1>
+    </div>
 </main>
