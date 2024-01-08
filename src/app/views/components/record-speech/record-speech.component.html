@@ -20,16 +20,14 @@
         </div>
         
         <div class="recording-status">
-            <ul>
-                <li class="record-status-list">
-                    <div>Time</div>
-                    <div>{{ recordedTime }}</div>
-                </li>
-                <li class="record-status-list">
-                    <div>Result</div>
-                    <textarea disabled>{{ recgnizedText }}</textarea>
-                </li>
-            </ul>
+            <div class="record-status-time">
+                <div class="record-left">Time</div>
+                <div class="record-time">{{ recordedTime }}</div>
+            </div>
+            <div class="record-status-result">
+                <div class="record-left">Result</div>
+                <p class="record-recognition">{{ recgnizedText }}</p>
+            </div>
         </div>
     </div>
 </main>

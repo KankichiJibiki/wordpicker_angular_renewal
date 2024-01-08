@@ -105,6 +105,7 @@ export class SearchDictionaryComponent {
   }
 
   public toggleDetailsSidenav(wordSet: WordSet): void{
+    console.log(wordSet)
     this.openDetailsNavEvent.emit(wordSet);
   }
 }

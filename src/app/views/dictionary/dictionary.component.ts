@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class DictionaryComponent {
   public username: string = "";
-  public wordSet!: WordSet;
+  public wordSet!: any;
   @ViewChild('detailSidenav') sidenav!: MatSidenav;
 
   constructor(
@@ -20,7 +20,6 @@ export class DictionaryComponent {
   }
 
   public openDetailSidenav(wordSet: WordSet){
-    console.log(wordSet);
     this.wordSet = wordSet;
     this.sidenav.open();
   }

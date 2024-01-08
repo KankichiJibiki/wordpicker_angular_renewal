@@ -1,13 +1,34 @@
 <mat-sidenav-container class="main-dictionary-content">
     <!-- Side Body -->
     <mat-sidenav mode="over" align="start" #detailSidenav class="detail-word-container">
-        <h1 class="word-detail-title">{{ wordSet?.word }} <span>in details</span></h1>
-        <div class="word-item">Meaning > {{ wordSet?.meaning }}</div>
-        <div class="word-item">Use-Case > {{ wordSet?.useCase }}</div>
-        <div class="word-item">Synonymous > {{ wordSet?.synonymous }}</div>
-        <div class="word-item">Word type > {{ wordSet?.typeId }}</div>
-        <div class="word-item">Creation date > {{ wordSet?.created_date | date: 'Y-MM-dd H:m:s'}}</div>
-        <div class="word-item">Update date > {{ wordSet?.updated_date | date: 'Y-MM-dd H:m:s'}}</div>
+        <p class="word-sub-title">
+            Word <span class="annotation">"{{ wordSet?.word }}"</span> was created at <span class="annotation">{{ wordSet?.created_date | date: 'H:m:s' }}</span> on <span class="annotation">{{ wordSet?.created_date | date: 'Y-MM-dd' }}</span>
+        </p>
+        <h1 class="word-detail-title">Word details</h1>
+        <mat-nav-list>
+            <div class="word-item" mat-list-item>
+                <div class="item-title">Meaning</div>
+                <div class="item-content">{{ wordSet?.meaning }}</div>
+            </div>
+            <div class="word-item" mat-list-item>
+                <div class="item-title">Use Case</div>
+                <div class="item-content">{{ wordSet?.useCase }}</div>
+            </div>
+            <div class="word-item" mat-list-item>
+                <div class="item-title">Synonymous</div>
+                <div class="item-content">{{ wordSet?.synonymous }}</div>
+            </div>
+            <div class="word-item" mat-list-item>
+                <div class="item-title">Word Type</div>
+                <div class="item-content">{{ wordSet?.type_jp }}</div>
+            </div>
+            <div class="word-item" mat-list-item>
+                <div class="item-title">Updated</div>
+                <div class="item-content">
+                    {{ wordSet?.updated_date | date: 'Y-MM-dd H:m:s' }}
+                </div>
+            </div>
+        </mat-nav-list>
     </mat-sidenav>
     <!-- Main Body -->
     <mat-sidenav-content>
