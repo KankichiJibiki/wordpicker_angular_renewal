@@ -318,6 +318,27 @@ background-color: rgba(0, 0, 0, .28);
     border-bottom: #3d4fb8 double 2px;
 }
 
+.mode-container{
+    margin-top: .2rem;
+    margin-left: 1rem;
+}
+
+.speech-text-mode{
+    padding: .6rem;
+    border: #fff .5px solid;
+    border-radius: 5%;
+    height: 1.5rem;
+    line-height: 1.5rem;
+}
+
+.free-mode{
+    background-color: #bcf2fc;
+}
+
+.save-mode{
+    background-color: #eebf94;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 

@@ -1,6 +1,16 @@
 <main class="recording-main-container">
     <div class="title">
-        <h1>Speech To Text</h1>
+        <div class="d-flex">
+            <h1>Speech To Text</h1>
+            <div class="mode-container">
+                <ng-container *ngIf="recordMode">
+                    <span class="speech-text-mode free-mode">FREE MODE</span>
+                </ng-container>
+                <ng-container *ngIf="!recordMode">
+                    <span class="speech-text-mode save-mode">SAVE MODE</span>
+                </ng-container>
+            </div>
+        </div>
         <p>Recognize your speech to text</p>
     </div>
     <div class="recording-container">
@@ -21,12 +31,12 @@
         
         <div class="recording-status">
             <div class="record-status-time">
-                <div class="record-left">Time</div>
-                <div class="record-time">{{ recordedTime }}</div>
+                <div class="record-item">Time</div>
+                <div>{{ recordedTime }}</div>
             </div>
             <div class="record-status-result">
-                <div class="record-left">Result</div>
-                <p class="record-recognition">{{ recgnizedText }}</p>
+                <div class="record-item">Result</div>
+                <p>{{ recgnizedText }}</p>
             </div>
         </div>
     </div>

@@ -10,15 +10,18 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./record-speech.component.css']
 })
 export class RecordSpeechComponent {
-  private speechAudioData: SpeechAudioData = {} as SpeechAudioData;
+  static readonly RECORD_FREE_MODE = 1;
+  static readonly RECORD_SAVE_MODE = 0;
+
   public recordedVoiceUrlSubject: BehaviorSubject<string> = new BehaviorSubject<string>("");
   public recognizedTextSubject: BehaviorSubject<string> = new BehaviorSubject<string>("");
 
   public isRecording = false;
-  public recordedTime = "";
+  public recordedTime = "00:00";
   public blobUrl: any;
   public teste: any;
-  public recgnizedText = "";
+  public recgnizedText = "No result";
+  public recordMode = RecordSpeechComponent.RECORD_FREE_MODE;
 
   // Refer to this -> // https://stackblitz.com/edit/angular-audio-recorder?file=src%2Fapp%2Fapp.component.ts
   constructor(

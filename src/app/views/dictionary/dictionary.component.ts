@@ -20,6 +20,7 @@ export class DictionaryComponent {
   }
 
   public openDetailSidenav(wordSet: WordSet){
+    console.log(wordSet);
     this.wordSet = wordSet;
     this.sidenav.open();
   }

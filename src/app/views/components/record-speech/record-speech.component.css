@@ -21,26 +21,10 @@
 .record-status-time, .record-status-result{
     font-size: 1.1rem;
     display: flex;
-    border: 1px solid #fff;
-    padding: 0.5rem;
+    font-size: 1.3rem;
+    margin-bottom: .7rem;
 }
 
-.record-status-result{
-    height: 100%;
-}
-
-.record-left{
-    width: 55%;
-}
-
-.record-time, .record-recognition{
-    width: 40%;
-}
-
-.record-time{
-
-}
-
-.record-recognition{
-
+.record-item{
+    padding-right: .7rem;
 }
