@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dictionary-detail',
@@ -7,4 +8,10 @@ import { Component, Input } from '@angular/core';
 })
 export class DictionaryDetailComponent {
   @Input() wordSet!: any;
+
+  constructor(private route: Router){}
+
+  public routeToPronouce(id: number) {
+    this.route.navigate(['pronounce'], { queryParams: {id: id} })
+  }
 }

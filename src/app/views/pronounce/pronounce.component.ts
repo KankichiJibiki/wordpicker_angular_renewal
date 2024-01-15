@@ -2,6 +2,7 @@ import { BehaviorSubject, lastValueFrom } from 'rxjs';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { TextAndSpeechService } from 'src/app/services/textAndSpeech/text-and-speech.service';
 import { WordSetService } from 'src/app/services/word-set/word-set.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-pronounce',
@@ -20,9 +21,17 @@ export class PronounceComponent {
 
   constructor(
     private textAndSpeechService: TextAndSpeechService,
-    private wordService: WordSetService
+    private wordService: WordSetService,
+    private router: ActivatedRoute
   ){
     this.audio = new Audio();
+  }
+
+  ngOnInit() {
+    this.router.queryParams.subscribe(params => {
+      const id = params['id'];
+      console.log(id);
+    })
   }
 
   public getSpeechFile() {

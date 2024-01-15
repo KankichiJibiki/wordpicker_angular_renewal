@@ -28,7 +28,7 @@
                 *ngIf="wordSet?.yourPronouceURL then hasOwnPronounce else noOwnPronounce">
             </ng-container>
             <ng-template #hasOwnPronounce>{{ wordSet?.yourPronouceURL }}</ng-template>
-            <ng-template #noOwnPronounce><a routerLink="pronounce/{{ wordSet?.id }}">Register</a></ng-template>
+            <ng-template #noOwnPronounce><a (click)="routeToPronouce(wordSet?.id)">Register Now</a></ng-template>
         </div>
     </div>
     <div class="word-item" mat-list-item>
