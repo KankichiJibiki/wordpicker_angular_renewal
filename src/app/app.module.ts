@@ -25,12 +25,13 @@ import { DashboardModule } from './views/dashboard/dashboard.module';
 import { ErrorInterceptor } from './services/error/error.interceptor';
 import { DictionaryModule } from './views/dictionary/dictionary.module';
 import { PronounceModule } from './views/pronounce/pronounce.module';
+import { DictionaryDetailComponent } from './views/components/dictionary-detail/dictionary-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProgressSpinnerComponent,
-    NavigationComponent
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,

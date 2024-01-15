@@ -14,7 +14,7 @@ const routes: Routes = [
   {path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path:'index', component: IndexComponent, canActivate: [AuthGuard]},
   {path:'dictionary', component: DictionaryComponent, canActivate: [AuthGuard]},
-  {path:'pronounce', component: PronounceComponent, canActivate: [AuthGuard]},
+  {path:'pronounce/:id', component: PronounceComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

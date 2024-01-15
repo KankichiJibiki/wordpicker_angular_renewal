@@ -21,6 +21,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { PieChartComponent } from '../components/charts-all/pie-chart/pie-chart.component';
 import { NgChartsModule } from 'ng2-charts';
+import { DictionaryDetailComponent } from '../components/dictionary-detail/dictionary-detail.component';
 
 
 
@@ -29,7 +30,8 @@ import { NgChartsModule } from 'ng2-charts';
     DictionaryComponent,
     SearchDictionaryComponent,
     StatusDictionaryComponent,
-    PieChartComponent
+    PieChartComponent,
+    DictionaryDetailComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,40 @@
+<div class="detail-header">
+    <p class="word-sub-title">
+        Word <span class="annotation">"{{ wordSet?.word }}"</span> was created at <span class="annotation">{{ wordSet?.created_date | date: 'H:m:s' }}</span> on <span class="annotation">{{ wordSet?.created_date | date: 'Y-MM-dd' }}</span>
+    </p>
+    <h1 class="word-detail-title">Word details</h1>
+</div>
+<mat-nav-list>
+    <div class="word-item" mat-list-item>
+        <div class="item-title">Meaning</div>
+        <div class="item-content">{{ wordSet?.meaning }}</div>
+    </div>
+    <div class="word-item" mat-list-item>
+        <div class="item-title">Use Case</div>
+        <div class="item-content">{{ wordSet?.useCase }}</div>
+    </div>
+    <div class="word-item" mat-list-item>
+        <div class="item-title">Synonymous</div>
+        <div class="item-content">{{ wordSet?.synonymous }}</div>
+    </div>
+    <div class="word-item" mat-list-item>
+        <div class="item-title">Word Type</div>
+        <div class="item-content">{{ wordSet?.type_jp }}</div>
+    </div>
+    <div class="word-item" mat-list-item>
+        <div class="item-title">Your Pronouce</div>
+        <div class="item-content">
+            <ng-container 
+                *ngIf="wordSet?.yourPronouceURL then hasOwnPronounce else noOwnPronounce">
+            </ng-container>
+            <ng-template #hasOwnPronounce>{{ wordSet?.yourPronouceURL }}</ng-template>
+            <ng-template #noOwnPronounce><a routerLink="pronounce/{{ wordSet?.id }}">Register</a></ng-template>
+        </div>
+    </div>
+    <div class="word-item" mat-list-item>
+        <div class="item-title">Updated</div>
+        <div class="item-content">
+            {{ wordSet?.updated_date | date: 'Y-MM-dd H:m:s' }}
+        </div>
+    </div>
+</mat-nav-list>
